@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Same color green as in ic_launcher //-->
+    <color name="actionbar_background">#9CFF85</color>
+    <color name="actionbar_background_dark">#ff5eba53</color>
+</resources>

@@ -1,8 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- remove default title and actionbar, replace by Toolbar (see layout xml) //-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="colorPrimary">@color/actionbar_background</item>
+        <item name="colorPrimaryDark">@color/actionbar_background_dark</item>
+        <item name="colorAccent">@color/actionbar_background</item>
     </style>
 
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!-- http://stackoverflow.com/questions/28042331/android-toolbar-small-title-text-in-landscape-mode //-->
+        <item name="android:textSize">24sp</item>
+    </style>
 </resources>
