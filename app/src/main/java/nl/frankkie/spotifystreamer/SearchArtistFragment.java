@@ -2,6 +2,7 @@ package nl.frankkie.spotifystreamer;
 
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -28,7 +29,9 @@ public class SearchArtistFragment extends ListFragment {
 
     public static final String TAG = "SpotifyStreamer";
     ListView mListView;
+    SearchArtistAdapter adapter;
     SpotifyApi mSpotifyApi;
+    Handler handler = new Handler();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +45,9 @@ public class SearchArtistFragment extends ListFragment {
 
         //init UI
         mListView = getListView();
+
+        adapter = new SearchArtistAdapter(this.getActivity());
+        mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -84,10 +90,16 @@ public class SearchArtistFragment extends ListFragment {
         SpotifyService spotifyService = mSpotifyApi.getService();
         spotifyService.searchArtists(searchQuery, new SpotifyCallback<ArtistsPager>() {
             @Override
-            public void success(ArtistsPager artistsPager, Response response) {
+            public void success(final ArtistsPager artistsPager, Response response) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.setArtistsPager(artistsPager);
+                    }
+                });
                 Log.v(TAG, "Spotify Response received");
                 Log.v(TAG, artistsPager.toString());
-                Log.v(TAG, response.toString()); //Set breakpoint here to test.
+                Log.v(TAG, response.toString()); //Set breakpoint here
             }
 
             @Override
