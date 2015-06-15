@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
@@ -32,6 +34,8 @@ public class SearchArtistFragment extends ListFragment {
     SearchArtistAdapter adapter;
     SpotifyApi mSpotifyApi;
     Handler handler = new Handler();
+    //Don't refresh on EVERY keypress, to not run out of rate-limit.
+    boolean refreshSearchResultOnTextChanged = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,8 +77,21 @@ public class SearchArtistFragment extends ListFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 //Refresh search results
-                String searchQuery = s.toString();
+                if (refreshSearchResultOnTextChanged) {
+                    String searchQuery = s.toString();
+                    refreshSearchResults(searchQuery);
+                }
+            }
+        });
+
+        searchBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String searchQuery = v.getText().toString();
                 refreshSearchResults(searchQuery);
+                //False = let someone else handle it.
+                //True = we got this.
+                return true;
             }
         });
     }
