@@ -104,7 +104,7 @@ public class SearchArtistFragment extends ListFragment {
 
             @Override
             public void failure(SpotifyError spotifyError) {
-                Log.v(TAG, "SpotifyError " + spotifyError.getErrorDetails().message);
+                Log.v(TAG, "SpotifyError " + spotifyError.getErrorDetails());
             }
         });
     }
