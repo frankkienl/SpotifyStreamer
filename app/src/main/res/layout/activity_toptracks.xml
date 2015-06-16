@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,29 +10,21 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:titleTextAppearance="@style/ToolbarTitle"
-        android:background="@color/actionbar_background" />
+        android:background="@color/actionbar_background"
+        app:titleTextAppearance="@style/ToolbarTitle" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:baselineAligned="false"
-        android:divider="?android:attr/dividerHorizontal"
-        android:orientation="horizontal"
-        android:showDividers="middle"
         tools:context=".MainActivity">
 
-        <fragment
-            android:id="@+id/search_artist_fragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:layout="@android:layout/list_content" />
+        <!-- Fragment will be added in code //-->
         <FrameLayout
             android:id="@+id/toptracks_fragment_container"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            tools:layout="@android:layout/list_content" />
+
     </LinearLayout>
 
 </LinearLayout>

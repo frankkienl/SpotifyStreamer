@@ -14,13 +14,12 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyCallback;
 import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
-import kaaes.spotify.webapi.android.models.Artists;
+import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
 import retrofit.client.Response;
 
@@ -36,11 +35,22 @@ public class SearchArtistFragment extends ListFragment {
     Handler handler = new Handler();
     //Don't refresh on EVERY keypress, to not run out of rate-limit.
     boolean refreshSearchResultOnTextChanged = false;
+    Callbacks mCallbacks;
+
+    public interface Callbacks {
+        public void onItemSelected(String artistName, Artist artist);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.search_artist_fragment, container, false);
         return v;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mCallbacks = (Callbacks) getActivity();
     }
 
     @Override
@@ -57,7 +67,7 @@ public class SearchArtistFragment extends ListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: properly handle item click
-                Toast.makeText(SearchArtistFragment.this.getActivity(), "This function is not implemented yet.", Toast.LENGTH_LONG).show();
+                mCallbacks.onItemSelected(((Artist) adapter.getItem(position)).name, (Artist) adapter.getItem(position));
             }
         });
 
