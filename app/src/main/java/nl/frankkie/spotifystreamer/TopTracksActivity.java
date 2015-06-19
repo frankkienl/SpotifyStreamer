@@ -1,17 +1,40 @@
 package nl.frankkie.spotifystreamer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 /**
  * Created by FrankkieNL on 16-6-2015.
  */
-public class TopTracksActivity extends Activity {
+public class TopTracksActivity extends ActionBarActivity {
+
+    Toolbar mToolbar;
+    String artistName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Get params
+        Intent myIntent = getIntent();
+        artistName = myIntent.getStringExtra(TopTracksFragment.ARG_ARTIST_NAME);
+
         initUI(savedInstanceState);
+        initToolbar();
+    }
+
+    public void initToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle(getString(R.string.top_10_tracks));
+        mToolbar.setSubtitle(artistName);
+        setSupportActionBar(mToolbar);
+        //enable back-arrow in top-left.
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void initUI(Bundle savedInstanceState){
@@ -39,5 +62,22 @@ public class TopTracksActivity extends Activity {
                     .add(R.id.toptracks_fragment_container, fragment)
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

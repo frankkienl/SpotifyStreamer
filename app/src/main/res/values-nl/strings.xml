@@ -4,4 +4,5 @@
     <string name="no_search_results">Geen zoek resultaten.</string>
     <string name="search_for_artist">Zoek naar artiest</string>
     <string name="no_tracks_found">Geen nummers gevonden</string>
+    <string name="top_10_tracks">Top 10 nummers</string>
 </resources>
