@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import kaaes.spotify.webapi.android.models.Artist;
 
 
-public class MainActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
+public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
 
     private CharSequence mTitle;
     Toolbar mToolbar;

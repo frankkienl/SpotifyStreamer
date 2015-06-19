@@ -1,6 +1,5 @@
 package nl.frankkie.spotifystreamer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -77,7 +76,7 @@ public class TopTracksActivity extends ActionBarActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+            NavUtils.navigateUpTo(this, new Intent(this, SearchArtistActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
