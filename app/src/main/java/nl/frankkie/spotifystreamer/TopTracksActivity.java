@@ -56,6 +56,8 @@ public class TopTracksActivity extends ActionBarActivity {
             Bundle arguments = new Bundle();
             arguments.putString(TopTracksFragment.ARG_ARTIST_NAME,
                     getIntent().getStringExtra(TopTracksFragment.ARG_ARTIST_NAME));
+            arguments.putString(TopTracksFragment.ARG_ARTIST_ID,
+                    getIntent().getStringExtra(TopTracksFragment.ARG_ARTIST_ID));
             TopTracksFragment fragment = new TopTracksFragment();
             fragment.setArguments(arguments);
             getFragmentManager().beginTransaction()

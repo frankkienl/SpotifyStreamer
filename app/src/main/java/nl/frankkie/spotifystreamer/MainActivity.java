@@ -36,10 +36,11 @@ public class MainActivity extends ActionBarActivity implements SearchArtistFragm
     }
 
     @Override
-    public void onItemSelected(String artistName, Artist artist) {
+    public void onItemSelected(Artist artist) {
         if (mTwoPane){
             Bundle arguments = new Bundle();
-            arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artistName);
+            arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.name);
+            arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             TopTracksFragment fragment = new TopTracksFragment();
             fragment.setArguments(arguments);
             getFragmentManager().beginTransaction()
@@ -47,8 +48,10 @@ public class MainActivity extends ActionBarActivity implements SearchArtistFragm
                     .commit();
         } else {
             Intent detailIntent = new Intent(this, TopTracksActivity.class);
-            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artistName);
+            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.name);
+            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             startActivity(detailIntent);
         }
     }
 }
+

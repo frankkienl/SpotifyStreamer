@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyCallback;
@@ -30,21 +31,21 @@ public class SearchArtistFragment extends ListFragment {
 
     public static final String TAG = "SpotifyStreamer";
     ListView mListView;
-    SearchArtistAdapter adapter;
+    SearchArtistAdapter mAdapter;
     SpotifyApi mSpotifyApi;
-    Handler handler = new Handler();
+    Handler mHandler = new Handler();
     //Don't refresh on EVERY keypress, to not run out of rate-limit.
     boolean refreshSearchResultOnTextChanged = false;
     Callbacks mCallbacks;
 
     public interface Callbacks {
-        public void onItemSelected(String artistName, Artist artist);
+        public void onItemSelected(Artist artist);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.search_artist_fragment, container, false);
-        return v;
+        View view = inflater.inflate(R.layout.search_artist_fragment, container, false);
+        return view;
     }
 
     @Override
@@ -60,14 +61,14 @@ public class SearchArtistFragment extends ListFragment {
         //init UI
         mListView = getListView();
 
-        adapter = new SearchArtistAdapter(this.getActivity());
-        mListView.setAdapter(adapter);
+        mAdapter = new SearchArtistAdapter(this.getActivity());
+        mListView.setAdapter(mAdapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: properly handle item click
-                mCallbacks.onItemSelected(((Artist) adapter.getItem(position)).name, (Artist) adapter.getItem(position));
+                mCallbacks.onItemSelected((Artist) mAdapter.getItem(position));
             }
         });
 
@@ -118,10 +119,11 @@ public class SearchArtistFragment extends ListFragment {
         spotifyService.searchArtists(searchQuery, new SpotifyCallback<ArtistsPager>() {
             @Override
             public void success(final ArtistsPager artistsPager, Response response) {
-                handler.post(new Runnable() {
+                mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.setArtistsPager(artistsPager);
+                        //Using mHandler.post, as this needs to be on the on the UI-thread
+                        mAdapter.setArtistsPager(artistsPager);
                     }
                 });
                 Log.v(TAG, "Spotify Response received");
@@ -130,8 +132,14 @@ public class SearchArtistFragment extends ListFragment {
             }
 
             @Override
-            public void failure(SpotifyError spotifyError) {
+            public void failure(final SpotifyError spotifyError) {
                 Log.v(TAG, "SpotifyError " + spotifyError.getErrorDetails());
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "SpotifyError " + spotifyError.getErrorDetails(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }

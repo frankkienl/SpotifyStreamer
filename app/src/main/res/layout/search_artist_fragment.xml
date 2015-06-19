@@ -4,9 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- imeOptions to put search-button on keyboard instead of 'enter' //-->
     <EditText
         android:id="@+id/search_artist_edittext"
         android:hint="@string/search_for_artist"
+        android:imeOptions="actionSearch"
+        android:inputType="text|textVisiblePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <ListView

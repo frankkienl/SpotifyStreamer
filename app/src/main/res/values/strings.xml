@@ -4,4 +4,6 @@
     <string name="search_for_artist">Search for artist</string>
     <string name="no_tracks_found">No tracks found</string>
     <string name="top_10_tracks">Top 10 Tracks</string>
+    <string name="not_implemented">Not implemented yet.</string>
+    <string name="default_countrycode">US</string>
 </resources>

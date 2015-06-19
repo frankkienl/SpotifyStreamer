@@ -5,4 +5,6 @@
     <string name="search_for_artist">Zoek naar artiest</string>
     <string name="no_tracks_found">Geen nummers gevonden</string>
     <string name="top_10_tracks">Top 10 nummers</string>
+    <string name="not_implemented">Nog niet geimplementeerd.</string>
+    <string name="default_countrycode">NL</string>
 </resources>
