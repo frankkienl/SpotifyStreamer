@@ -65,7 +65,7 @@ public class TopTracksAdapter extends BaseAdapter {
         viewHolder.title.setText(track.name);
         viewHolder.album.setText(track.album.name);
 
-        String url = SearchArtistAdapter.getImageWithBestSize(track.album.images, (int) (48 * context.getResources().getDisplayMetrics().density));
+        String url = Util.getImageWithBestSize(track.album.images, (int) (48 * context.getResources().getDisplayMetrics().density));
         //I'm not a huge fan of this chaining.
         //I call this 'Breiwerk' Dutch for 'Stitching'.
         Picasso.with(context)

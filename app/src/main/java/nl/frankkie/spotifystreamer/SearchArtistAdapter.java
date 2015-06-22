@@ -69,7 +69,7 @@ public class SearchArtistAdapter extends BaseAdapter {
         Artist artist = (Artist) getItem(position);
         viewHolder.artistName.setText(artist.name);
 
-        String url = getImageWithBestSize(artist.images, (int) (48 * context.getResources().getDisplayMetrics().density));
+        String url = Util.getImageWithBestSize(artist.images, (int) (48 * context.getResources().getDisplayMetrics().density));
         //I'm not a huge fan of this chaining.
         //I call this 'Breiwerk' Dutch for 'Stitching'.
         Picasso.with(context)
@@ -80,30 +80,7 @@ public class SearchArtistAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /**
-     * This will find the image that has the height that closest matched the preference.
-     * The image can be bigger or smaller though.
-     * @param images list of images to check
-     * @param preferredHeight the height you would like the best
-     * @return url of an image that best matches the preferred height.
-     */
-    public static String getImageWithBestSize(List<Image> images, int preferredHeight) {
-        if (images == null || images.size() == 0){
-            //no images
-            return null;
-        }
-        int index = -1;
-        int lowestDiff = Integer.MAX_VALUE;
-        for (int i = 0; i < images.size(); i++){
-            int imageHeight = images.get(i).height;
-            int diffWithPreferred = Math.abs(preferredHeight - imageHeight);
-            if (diffWithPreferred < lowestDiff){
-                lowestDiff = diffWithPreferred;
-                index = i;
-            }
-        }
-        return images.get(index).url;
-    }
+
 
     public static class ViewHolder {
 
