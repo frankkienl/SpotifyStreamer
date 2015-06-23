@@ -294,8 +294,7 @@ public class Util {
             //Z
             {"ZA","South Africa"},
             {"ZM","Zambia"},
-            {"ZW","Zimbabwe"},
-            //TODO: finish this list
+            {"ZW","Zimbabwe"}
     };
 
     public static int getIndexByCountryCode(String countryCode){

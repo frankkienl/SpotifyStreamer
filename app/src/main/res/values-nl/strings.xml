@@ -8,5 +8,5 @@
     <string name="not_implemented">Nog niet geimplementeerd.</string>
     <string name="default_countrycode">NL</string>
     <string name="action_settings">Instellingen</string>
-    <string name="select_country">Select country</string>
+    <string name="select_country">Selecteer land</string>
 </resources>

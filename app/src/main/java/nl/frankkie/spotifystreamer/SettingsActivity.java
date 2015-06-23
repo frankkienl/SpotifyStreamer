@@ -16,6 +16,9 @@ import android.widget.CheckedTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * Created by FrankkieNL on 20-6-2015.
  */
@@ -68,7 +71,8 @@ public class SettingsActivity extends ActionBarActivity {
         super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String countryCode = prefs.getString("country", getString(R.string.default_countrycode));
-        int position = Util.getIndexByCountryCode(countryCode);
+        //I really hope onResume is guaranteed to execute after onCreate, or this might cause a NullPointerException xD
+        int position = ((MySpinnerAdapter)spinner.getAdapter()).getIndexByCountryCode(countryCode);
         spinner.setSelection(position);
     }
 
@@ -85,14 +89,24 @@ public class SettingsActivity extends ActionBarActivity {
 
     public class MySpinnerAdapter extends BaseAdapter {
 
+        String[][] sortedCountryList;
+
+        public MySpinnerAdapter(){
+            //Sort country list by name not by code.
+            sortedCountryList = new String[Util.iso3166_1_alpha_2_countryCodes.length][Util.iso3166_1_alpha_2_countryCodes[0].length];
+            //copy to new array, to not sort the original array
+            System.arraycopy(Util.iso3166_1_alpha_2_countryCodes,0,sortedCountryList,0,Util.iso3166_1_alpha_2_countryCodes.length);
+            Arrays.sort(sortedCountryList,new MyCountryComparator());
+        }
+
         @Override
         public int getCount() {
-            return Util.iso3166_1_alpha_2_countryCodes.length;
+            return sortedCountryList.length;
         }
 
         @Override
         public Object getItem(int position) {
-            return Util.iso3166_1_alpha_2_countryCodes[position];
+            return sortedCountryList[position];
         }
 
         @Override
@@ -108,6 +122,24 @@ public class SettingsActivity extends ActionBarActivity {
             }
             ((TextView)convertView).setText(country[1]);
             return convertView;
+        }
+
+        public int getIndexByCountryCode(String countryCode){
+            for (int i = 0; i < sortedCountryList.length; i++){
+                if (sortedCountryList[i][0].equalsIgnoreCase(countryCode)){
+                    return i;
+                }
+            }
+            return -1; //not found, yes this will crash the app
+        }
+    }
+
+    public class MyCountryComparator implements Comparator<String[]>{
+
+        @Override
+        public int compare(String[] lhs, String[] rhs) {
+            //Sort by Country Name
+            return lhs[1].compareTo(rhs[1]);
         }
     }
 }
