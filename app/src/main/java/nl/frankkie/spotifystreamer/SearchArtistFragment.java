@@ -43,6 +43,12 @@ public class SearchArtistFragment extends ListFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_artist_fragment, container, false);
         return view;
@@ -61,7 +67,12 @@ public class SearchArtistFragment extends ListFragment {
         //init UI
         mListView = getListView();
 
-        mAdapter = new SearchArtistAdapter(this.getActivity());
+        if (mAdapter == null) {
+            //Important: this fragment has RetainInstance turned on,
+            //So check if the instance-variable is already not null
+            //before overriding it with a new empty adapter.
+            mAdapter = new SearchArtistAdapter(this.getActivity());
+        }
         mListView.setAdapter(mAdapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,6 +119,7 @@ public class SearchArtistFragment extends ListFragment {
     }
 
     public void refreshSearchResults(String searchQuery) {
+        Toast.makeText(getActivity(), String.format(getString(R.string.searching_for),searchQuery),Toast.LENGTH_SHORT).show();
         if (mSpotifyApi == null) {
             //Create SpotifyInstance only when needed
             //This could be an expensive call,

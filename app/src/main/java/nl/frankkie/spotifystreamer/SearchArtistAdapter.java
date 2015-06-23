@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
-import kaaes.spotify.webapi.android.models.Image;
 
 /**
  * Created by FrankkieNL on 9-6-2015.
@@ -31,6 +29,10 @@ public class SearchArtistAdapter extends BaseAdapter {
     public void setArtistsPager(ArtistsPager artistsPager) {
         this.artistsPager = artistsPager;
         notifyDataSetChanged();
+        if (artistsPager.artists.items.isEmpty()) {
+            //No search results
+            Toast.makeText(context, context.getString(R.string.no_search_results_refine), Toast.LENGTH_LONG).show();
+        }
     }
 
     public ArtistsPager getArtistsPager() {
@@ -79,7 +81,6 @@ public class SearchArtistAdapter extends BaseAdapter {
                 .into(viewHolder.imageView);
         return convertView;
     }
-
 
 
     public static class ViewHolder {
