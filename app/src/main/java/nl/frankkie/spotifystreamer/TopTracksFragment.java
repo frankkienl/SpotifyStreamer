@@ -51,7 +51,7 @@ public class TopTracksFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mListView = (ListView) getListView();
+        mListView = getListView();
         mAdapter = new TopTracksAdapter(getActivity());
         mListView.setAdapter(mAdapter);
 

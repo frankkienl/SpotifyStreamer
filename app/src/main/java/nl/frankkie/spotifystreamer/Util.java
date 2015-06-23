@@ -22,7 +22,7 @@ public class Util {
     }
     Only the officially assigned codes are in the list below.
     */
-    public String[][] iso3166_1_alpha_2_countryCodes = new String[][]{
+    public static String[][] iso3166_1_alpha_2_countryCodes = new String[][]{
             //A
             {"AD", "Andorra"},
             {"AE", "United Arab Emirates"},
@@ -66,6 +66,15 @@ public class Util {
             {"NL", "Netherlands"},
             {"US", "United States of America"}
     };
+
+    public static int getIndexByCountryCode(String countryCode){
+        for (int i = 0; i < Util.iso3166_1_alpha_2_countryCodes.length; i++){
+            if (Util.iso3166_1_alpha_2_countryCodes[i][0].equalsIgnoreCase(countryCode)){
+                return i;
+            }
+        }
+        return -1; //not found, yes this will crash the app
+    }
 
     /**
      * This will find the image that has the height that closest matched the preference.

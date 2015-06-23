@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import kaaes.spotify.webapi.android.models.Artist;
 
@@ -26,6 +28,23 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
         if (findViewById(R.id.toptracks_fragment_container) != null) {
             mTwoPane = true;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true; //true as in: yes, use menu.
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            return true; //true as in: handled.
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void initToolbar() {
