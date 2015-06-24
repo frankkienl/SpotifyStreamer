@@ -11,9 +11,13 @@ public class Util {
 
     /*
     The Spotify API call, 'top-tracks' requires a ISO 3166-1 alpha-2 country code
-    //https://developer.spotify.com/web-api/get-artists-top-tracks/
-    //https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    //EU is not included in this list, as it generates this error:
+    https://developer.spotify.com/web-api/get-artists-top-tracks/
+    List of Codes
+    https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    List of counties Spotify Operates in:
+    https://www.spotify.com/nl/legal/end-user-agreement/plain/#s19
+    https://www.spotify.com/nl/about-us/contact/
+    EU is not included in this list, as it generates this error:
     {
        "error": {
          "status": 400,
@@ -21,7 +25,36 @@ public class Util {
        }
     }
     Only the officially assigned codes are in the list below.
+    And only the countries that Spotify operates in.
     */
+    public static String[][] iso3166_1_alpha_2_countryCodes_listedLegal = new String[][]{
+            {"AD", "Andorra"},
+            {"AT", "Austria"},
+            {"AU", "Australia"},
+            {"BE", "Belgium"},
+            {"CH","Switzerland"},
+            {"DE","Germany"},
+            {"DK","Denmark"},
+            {"ES","Spain"},
+            {"FI","Finland"},
+            {"FR","France"},
+            {"GB","United Kingdom of Great Britain and Northern Ireland"},
+            {"HK","Hong Kong"},
+            {"IE","Ireland"},
+            {"IT","Italy"},
+            {"LI","Liechtenstein"},
+            {"LU","Luxembourg"},
+            {"MC","Monaco"},
+            {"MX","Mexico"},
+            {"NL","Netherlands"},
+            {"NO","Norway"},
+            {"NZ","New Zealand"},
+            {"PL","Poland"},
+            {"SE","Sweden"},
+            {"SG","Singapore"},
+            {"US","United States of America"},
+    };
+
     public static String[][] iso3166_1_alpha_2_countryCodes = new String[][]{
             //A
             {"AD", "Andorra"},
@@ -295,6 +328,165 @@ public class Util {
             {"ZA","South Africa"},
             {"ZM","Zambia"},
             {"ZW","Zimbabwe"}
+    };
+
+    /*
+    https://developer.spotify.com/web-api/get-artists-top-tracks/
+    The sample lists the following coutries:
+    "available_markets": [
+    "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR",
+    "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT",
+    "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX",
+    "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE",
+    "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY"
+    ]
+     */
+    public static String[][] iso3166_1_alpha_2_countryCodes_APISample = new String[][]{
+            {"AD", "Andorra"},
+            {"AR", "Argentina"},
+            {"AT", "Austria"},
+            {"AU", "Australia"},
+            {"BE", "Belgium"},
+            {"BG", "Bulgaria"},
+            {"BO", "Bolivia, Plurinational State of"},
+            {"BR", "Brazil"},
+            {"CA","Canada"},
+            {"CH","Switzerland"},
+            {"CL","Chile"},
+            {"CO","Colombia"},
+            {"CR","Costa Rica"},
+            {"CY","Cyprus"},
+            {"CZ","Czech Republic"},
+            {"DE","Germany"},
+            {"DK","Denmark"},
+            {"DO","Dominican Republic"},
+            {"EC","Ecuador"},
+            {"EE","Estonia"},
+            {"ES","Spain"},
+            {"FI","Finland"},
+            {"FR","France"},
+            {"GB","United Kingdom of Great Britain and Northern Ireland"},
+            {"GR","Greece"},
+            {"GT","Guatemala"},
+            {"HK","Hong Kong"},
+            {"HU","Hungary"},
+            {"IE","Ireland"},
+            {"IS","Iceland"},
+            {"IT","Italy"},
+            {"LI","Liechtenstein"},
+            {"LT","Lithuania"},
+            {"LU","Luxembourg"},
+            {"LV","Latvia"},
+            {"MC","Monaco"},
+            {"MT","Malta"},
+            {"MX","Mexico"},
+            {"MY","Malaysia"},
+            {"NI","Nicaragua"},
+            {"NL","Netherlands"},
+            {"NO","Norway"},
+            {"NZ","New Zealand"},
+            {"PA","Panama"},
+            {"PE","Peru"},
+            {"PH","Philippines"},
+            {"PL","Poland"},
+            {"PT","Portugal"},
+            {"PY","Paraguay"},
+            {"RO","Romania"},
+            {"SE","Sweden"},
+            {"SG","Singapore"},
+            {"SI","Slovenia"},
+            {"SK","Slovakia"},
+            {"SV","El Salvador"},
+            {"TR","Turkey"},
+            {"TW","Taiwan, Province of China"},
+            {"US","United States of America"},
+            {"UY","Uruguay"},
+    };
+
+    /*
+    List of countries that are listed in the FAQ
+    (Not sorted by code, see Brazil and Bulgaria)
+    Countries with nothing but '//' behind it are definitely in the list
+    https://support.spotify.com/au/learn-more/faq/#!/article/Availability-in-overseas-territories
+    */
+    public static String[][] iso3166_1_alpha_2_countryCodes_listedFAQ = new String[][]{
+            {"AD", "Andorra"},//
+            {"AR", "Argentina"},//
+            {"AS", "American Samoa"},//United States of America
+            {"AT", "Austria"},//
+            {"AU", "Australia"},//
+             {"AX", "Åland Islands"},//Finland
+            {"BE", "Belgium"},//
+            {"BM", "Bermuda"},//United Kingdom
+            {"BO", "Bolivia, Plurinational State of"},//Bolivia
+            {"BR", "Brazil"},//
+            {"BG", "Bulgaria"},//
+            {"CA","Canada"},//
+            {"CL","Chile"},//
+            {"CO","Colombia"},//
+            {"CR","Costa Rica"},//
+            {"CY","Cyprus"},//
+            {"CZ","Czech Republic"},//
+            {"DK","Denmark"},//
+            {"FO","Faroe Islands"},//Denmark
+            {"GL","Greenland"},//Denmark
+            {"DO","Dominican Republic"},
+            {"EC","Ecuador"},//
+            {"SV","El Salvador"},//
+            {"EE","Estonia"},//
+            {"FI","Finland"},//
+            {"AX", "Åland Islands"},//Finland
+            {"FR","France"},//
+            {"YT","Mayotte"},//France
+            {"RE","Réunion"},//France
+            {"PF","French Polynesia"},//France
+            {"PM","Saint Pierre and Miquelon"},//France
+            {"WF","Wallis and Futuna"},//France
+            {"NC","New Caledonia"},//France
+            {"DE","Germany"},//
+            {"GR","Greece"},//
+            {"GT","Guatemala"},//
+            {"HN","Honduras"},//
+            {"HK","Hong Kong"},//
+            {"HU","Hungary"},//
+            {"IS","Iceland"},//
+            {"IT","Italy"},//
+            {"LV","Latvia"},//
+            {"LI","Liechtenstein"},//
+            {"LT","Lithuania"},//
+            {"LU","Luxembourg"},//
+            {"MY","Malaysia"},//
+            {"MT","Malta"},//
+            {"MX","Mexico"},//
+            {"MC","Monaco"},//
+            {"NL","Netherlands"},//
+            {"SX","Sint Maarten (Dutch part)"},//Netherlands Antilles
+            {"NZ","New Zealand"},//
+            {"CK","Cook Islands"},//New Zealand
+            {"NU","Niue"},//New Zealand
+            {"TK","Tokelau"},//Tokelau
+            {"NI","Nicaragua"},//
+            {"NO","Norway"},//
+            {"SJ","Svalbard and Jan Mayen"},//Norway
+            {"PA","Panama"},//
+            {"PY","Paraguay"},//
+            {"PE","Peru"},//
+            {"PH","Philippines"},//
+            {"PL","Poland"},//
+            {"PT","Portugal"},//
+            {"SG","Singapore"},//
+            {"SK","Slovakia"},//
+            {"ES","Spain"},//
+            //Balearic Islands is NOT in ISO 3166-1 alpha-2
+            //https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+            //It is in ISO 3166-2, as IB, according to
+            //https://en.wikipedia.org/?title=Balearic_Islands
+            {"IB", "Balearic Islands"},//Spain
+            //Canary Islands is NOT in ISO 3166-1 alpha-2
+            //It is in ISO 3166, as IC (reserved), according to
+            //https://en.wikipedia.org/wiki/Canary_Islands
+            {"IC","Canary Islands"},//Spain
+
     };
 
     public static int getIndexByCountryCode(String countryCode){
