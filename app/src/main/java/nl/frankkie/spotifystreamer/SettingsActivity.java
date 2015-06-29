@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.CheckedTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -93,10 +92,11 @@ public class SettingsActivity extends ActionBarActivity {
 
         public MySpinnerAdapter(){
             //Sort country list by name not by code.
-            sortedCountryList = new String[Util.iso3166_1_alpha_2_countryCodes.length][Util.iso3166_1_alpha_2_countryCodes[0].length];
+            sortedCountryList = new String[Util.iso3166_1_alpha_2_countryCodes_listedFAQ.length][Util.iso3166_1_alpha_2_countryCodes_listedFAQ[0].length];
             //copy to new array, to not sort the original array
-            System.arraycopy(Util.iso3166_1_alpha_2_countryCodes,0,sortedCountryList,0,Util.iso3166_1_alpha_2_countryCodes.length);
+            System.arraycopy(Util.iso3166_1_alpha_2_countryCodes_listedFAQ,0,sortedCountryList,0,Util.iso3166_1_alpha_2_countryCodes_listedFAQ.length);
             Arrays.sort(sortedCountryList,new MyCountryComparator());
+            //I chose to use the iso3166_1_alpha_2_countryCodes_listedFAQ list.
         }
 
         @Override

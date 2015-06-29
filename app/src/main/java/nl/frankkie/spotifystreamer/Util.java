@@ -414,9 +414,7 @@ public class Util {
             {"AR", "Argentina"},//
             {"AT", "Austria"},//
             {"AU", "Australia"},//
-            {"AX", "Åland Islands"},//Finland
             {"BE", "Belgium"},//
-            {"BM", "Bermuda"},//United Kingdom
             {"BO", "Bolivia, Plurinational State of"},//Bolivia
             {"BR", "Brazil"},//
             {"BG", "Bulgaria"},//
