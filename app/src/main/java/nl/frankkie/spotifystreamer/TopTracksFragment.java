@@ -24,6 +24,7 @@ import kaaes.spotify.webapi.android.SpotifyCallback;
 import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.Tracks;
+import nl.frankkie.spotifystreamer.model.MyTrack;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -35,12 +36,31 @@ public class TopTracksFragment extends ListFragment {
     public static final String TAG = "SpotifyStreamer";
     public static final String ARG_ARTIST_NAME = "artist_name";
     public static final String ARG_ARTIST_ID = "artist_id";
+    public static final String SAVED_TRACKS = "saved_tracks";
     ListView mListView;
     TopTracksAdapter mAdapter;
     String mArtistName;
     String mArtistId;
     Handler mHandler = new Handler();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null){
+            mAdapter = new TopTracksAdapter(getActivity());
+            mAdapter.setMyTracksArray(savedInstanceState.getParcelableArray(SAVED_TRACKS));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mAdapter != null){
+            outState.putParcelableArray(SAVED_TRACKS,mAdapter.getMyTracks().toArray(new MyTrack[mAdapter.getCount()]));
+        }
+    }
 
     @Nullable
     @Override
@@ -48,7 +68,6 @@ public class TopTracksFragment extends ListFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.toptracks_fragment, container, false);
         return view;
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

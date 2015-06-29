@@ -1,6 +1,8 @@
 package nl.frankkie.spotifystreamer;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,11 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.models.Tracks;
+import nl.frankkie.spotifystreamer.model.MyTrack;
 
 /**
  * Created by FrankkieNL on 19-6-2015.
@@ -19,31 +24,49 @@ import kaaes.spotify.webapi.android.models.Tracks;
 public class TopTracksAdapter extends BaseAdapter {
 
     Context context;
-    Tracks mTracks;
+    ArrayList<MyTrack> myTracks;
 
     public TopTracksAdapter(Context context){
         this.context = context;
     }
 
     public void setTracks(Tracks tracks) {
-        mTracks = tracks;
+        myTracks = new ArrayList<MyTrack>();
+        for (Track track : tracks.tracks){
+            MyTrack myTrack = new MyTrack(track,context);
+            myTracks.add(myTrack);
+        }
         notifyDataSetChanged();
+    }
+
+    public void setMyTracksArray(Parcelable[] myTracksArray){
+        myTracks = new ArrayList<MyTrack>();
+        if (myTracksArray != null && myTracksArray.length != 0){
+            for (Parcelable track : myTracksArray){
+                myTracks.add((MyTrack) track);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<MyTrack> getMyTracks() {
+        return myTracks;
     }
 
     @Override
     public int getCount() {
-        if (mTracks == null) {
+        if (myTracks == null) {
             return 0;
         }
-        return mTracks.tracks.size();
+        return myTracks.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if (mTracks == null) {
+        if (myTracks == null) {
             return null;
         }
-        return mTracks.tracks.get(position);
+        return myTracks.get(position);
     }
 
     @Override
@@ -61,15 +84,14 @@ public class TopTracksAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();
-        Track track = (Track) getItem(position);
-        viewHolder.title.setText(track.name);
-        viewHolder.album.setText(track.album.name);
+        MyTrack track = (MyTrack) getItem(position);
+        viewHolder.title.setText(track.title);
+        viewHolder.album.setText(track.album);
 
-        String url = Util.getImageWithBestSize(track.album.images, (int) (48 * context.getResources().getDisplayMetrics().density));
         //I'm not a huge fan of this chaining.
         //I call this 'Breiwerk' Dutch for 'Stitching'.
         Picasso.with(context)
-                .load(url)
+                .load(track.image)
                 .placeholder(R.drawable.ic_artist_image_error)
                 .error(R.drawable.ic_artist_image_error)
                 .into(viewHolder.image);
