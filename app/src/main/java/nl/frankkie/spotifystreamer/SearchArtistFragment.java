@@ -42,7 +42,7 @@ public class SearchArtistFragment extends ListFragment {
     private Toast latestToast;
 
     public interface Callbacks {
-        public void onItemSelected(Artist artist);
+        public void onItemSelected(SearchArtistAdapter.MyArtist artist);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class SearchArtistFragment extends ListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: properly handle item click
-                mCallbacks.onItemSelected((Artist) mAdapter.getItem(position));
+                mCallbacks.onItemSelected((SearchArtistAdapter.MyArtist) mAdapter.getItem(position));
             }
         });
 

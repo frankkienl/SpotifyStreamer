@@ -1,6 +1,8 @@
 package nl.frankkie.spotifystreamer;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
 
@@ -19,37 +23,43 @@ import kaaes.spotify.webapi.android.models.ArtistsPager;
  */
 public class SearchArtistAdapter extends BaseAdapter {
 
-    ArtistsPager artistsPager;
     Context context;
+    ArrayList<MyArtist> artists;
 
     public SearchArtistAdapter(Context context) {
         this.context = context;
     }
 
     public void setArtistsPager(ArtistsPager artistsPager) {
-        this.artistsPager = artistsPager;
+
+        artists = new ArrayList<MyArtist>();
+        for (Artist artist : artistsPager.artists.items) {
+            MyArtist myArtist = new MyArtist(artist, context);
+            artists.add(myArtist);
+        }
+
         notifyDataSetChanged();
-        if (artistsPager.artists.items.isEmpty()) {
+        if (artists.isEmpty()) {
             //No search results
             Toast.makeText(context, context.getString(R.string.no_search_results_refine), Toast.LENGTH_LONG).show();
         }
     }
 
-    public ArtistsPager getArtistsPager() {
-        return artistsPager;
+    public ArrayList<MyArtist> getArtists() {
+        return artists;
     }
 
     @Override
     public int getCount() {
-        if (artistsPager == null) {
+        if (artists == null) {
             return 0;
         }
-        return artistsPager.artists.items.size();
+        return artists.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return artistsPager.artists.items.get(position);
+        return artists.get(position);
     }
 
     @Override
@@ -68,14 +78,13 @@ public class SearchArtistAdapter extends BaseAdapter {
         }
 
         viewHolder = (ViewHolder) convertView.getTag();
-        Artist artist = (Artist) getItem(position);
-        viewHolder.artistName.setText(artist.name);
+        MyArtist artist = (MyArtist) getItem(position);
+        viewHolder.artistName.setText(artist.artistName);
 
-        String url = Util.getImageWithBestSize(artist.images, (int) (48 * context.getResources().getDisplayMetrics().density));
         //I'm not a huge fan of this chaining.
         //I call this 'Breiwerk' Dutch for 'Stitching'.
         Picasso.with(context)
-                .load(url)
+                .load(artist.image)
                 .placeholder(R.drawable.ic_artist_image_error)
                 .error(R.drawable.ic_artist_image_error)
                 .into(viewHolder.imageView);
@@ -91,6 +100,57 @@ public class SearchArtistAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             imageView = (ImageView) view.findViewById(R.id.artist_image);
             artistName = (TextView) view.findViewById(R.id.artist_name);
+        }
+    }
+
+    /**
+     * Creating my own Artist object,
+     * as the Artist object from the library is not Parcelable.
+     */
+    public static class MyArtist implements Parcelable {
+
+        String artistName;
+        String image;
+        String id;
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(artistName);
+            dest.writeString(image);
+            dest.writeString(id);
+        }
+
+        public static final Parcelable.Creator<MyArtist> CREATOR =
+                new Parcelable.Creator<MyArtist>() {
+
+                    @Override
+                    public MyArtist createFromParcel(Parcel source) {
+                        return new MyArtist(source);
+                    }
+
+                    @Override
+                    public MyArtist[] newArray(int size) {
+                        return new MyArtist[size];
+                    }
+                };
+
+        private MyArtist(Parcel in) {
+            //recreate from parcel
+            artistName = in.readString();
+            image = in.readString();
+            id = in.readString();
+        }
+
+        public MyArtist(Artist artist, Context context) {
+            //create from Artist-object from library
+            artistName = artist.name;
+            image = Util.getImageWithBestSize(artist.images, (int) (48 * context.getResources().getDisplayMetrics().density));
+            id = artist.id;
         }
     }
 }

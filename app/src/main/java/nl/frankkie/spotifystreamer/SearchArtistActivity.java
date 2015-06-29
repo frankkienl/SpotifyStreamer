@@ -7,9 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import kaaes.spotify.webapi.android.models.Artist;
-
-
 public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
 
     private CharSequence mTitle;
@@ -55,10 +52,10 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
     }
 
     @Override
-    public void onItemSelected(Artist artist) {
+    public void onItemSelected(SearchArtistAdapter.MyArtist artist) {
         if (mTwoPane){
             Bundle arguments = new Bundle();
-            arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.name);
+            arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
             arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             TopTracksFragment fragment = new TopTracksFragment();
             fragment.setArguments(arguments);
@@ -67,7 +64,7 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
                     .commit();
         } else {
             Intent detailIntent = new Intent(this, TopTracksActivity.class);
-            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.name);
+            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
             detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             startActivity(detailIntent);
         }
