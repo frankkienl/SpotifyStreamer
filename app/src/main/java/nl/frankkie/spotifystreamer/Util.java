@@ -1,5 +1,9 @@
 package nl.frankkie.spotifystreamer;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Image;
@@ -541,4 +545,29 @@ public class Util {
         }
         return images.get(index).url;
     }
+
+        public static void handleUnavailableCountry(Activity activity) {
+                AlertDialog.Builder b = new AlertDialog.Builder(activity);
+                b.setTitle(R.string.spotify_error);
+                b.setMessage(R.string.unavailable_country_advice);
+                b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                //nothing, just remove dialog.
+                        }
+                });
+                b.create().show();
+        }
+        public static void handleNoNetwork(Activity activity) {
+                AlertDialog.Builder b = new AlertDialog.Builder(activity);
+                b.setTitle(R.string.spotify_error);
+                b.setMessage(R.string.error_no_network);
+                b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                //nothing, just remove dialog.
+                        }
+                });
+                b.create().show();
+        }
 }

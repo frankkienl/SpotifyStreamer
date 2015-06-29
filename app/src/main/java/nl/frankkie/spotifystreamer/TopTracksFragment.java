@@ -1,6 +1,8 @@
 package nl.frankkie.spotifystreamer;
 
+import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +24,7 @@ import kaaes.spotify.webapi.android.SpotifyCallback;
 import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.Tracks;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
@@ -74,8 +77,8 @@ public class TopTracksFragment extends ListFragment {
         String countryCode = prefs.getString("country", getString(R.string.default_countrycode)); //default is dependant on system-language
         SpotifyService spotifyService = new SpotifyApi().getService();
         //Add location as parameter for the SpotifyService
-        Map<String,Object> spotifyParameters = new HashMap<String, Object>();
-        spotifyParameters.put("country",countryCode);
+        Map<String, Object> spotifyParameters = new HashMap<String, Object>();
+        spotifyParameters.put("country", countryCode);
         spotifyService.getArtistTopTrack(mArtistId, spotifyParameters, new SpotifyCallback<Tracks>() {
             @Override
             public void failure(final SpotifyError spotifyError) {
@@ -83,7 +86,22 @@ public class TopTracksFragment extends ListFragment {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "SpotifyError " + spotifyError.getErrorDetails(), Toast.LENGTH_LONG).show();
+                        //check for common errors
+                        if (RetrofitError.Kind.NETWORK == spotifyError.getRetrofitError().getKind()) {
+                            //No network connection
+                            Util.handleNoNetwork(getActivity());
+                            return;
+                        }
+                        if ("Unavailable country".equalsIgnoreCase(spotifyError.getErrorDetails().message)) {
+                            Util.handleUnavailableCountry(getActivity());
+                            return;
+                        }
+                        //Other errors, just show and hope users can fix it.
+                        if (spotifyError.getErrorDetails() != null) {
+                            Toast.makeText(getActivity(), getString(R.string.spotify_error) + ":\n(" + spotifyError.getErrorDetails().status + ") " + spotifyError.getErrorDetails().message, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), getString(R.string.spotify_error) + ":\n" + spotifyError.getRetrofitError().getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }

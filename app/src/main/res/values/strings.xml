@@ -10,4 +10,9 @@
     <string name="select_country">Select country</string>
     <string name="no_search_results_refine">No artists found, please refine your search.</string>
     <string name="searching_for">Searching for %s</string>
+    <string name="spotify_error">Spotify Error</string>
+    <string name="unavailable_country_advice">This artist is not available in the country you selected. Please pick another country or search for a different artist.</string>
+    <string name="pick_country">Pick country</string>
+    <string name="searc_artist">Search artist</string>
+    <string name="error_no_network">Cannot connect to Spotify. Please check your internet connection.</string>
 </resources>

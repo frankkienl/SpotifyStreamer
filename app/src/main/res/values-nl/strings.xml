@@ -11,4 +11,9 @@
     <string name="select_country">Selecteer land</string>
     <string name="no_search_results_refine">Geen artiesten gevonden, pas a.u.b. uw zoektermen aan.</string>
     <string name="searching_for">Zoeken naar %s</string>
+    <string name="spotify_error">Spotify Foutmelding</string>
+    <string name="unavailable_country_advice">Deze artiest is niet beschikbaar in het gekozen land. Kies een ander land of zoek naar een andere artiest.</string>
+    <string name="pick_country">Kies land</string>
+    <string name="searc_artist">Zoek artiest</string>
+    <string name="error_no_network">Kan niet verbinden met Spotify. Controleer uw internet verbinding.</string>
 </resources>

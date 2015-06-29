@@ -22,6 +22,7 @@ import kaaes.spotify.webapi.android.SpotifyError;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
@@ -37,6 +38,8 @@ public class SearchArtistFragment extends ListFragment {
     //Don't refresh on EVERY keypress, to not run out of rate-limit.
     boolean refreshSearchResultOnTextChanged = false;
     Callbacks mCallbacks;
+    //save lastest Toast-message, to be able to cancel it when needed.
+    private Toast latestToast;
 
     public interface Callbacks {
         public void onItemSelected(Artist artist);
@@ -119,7 +122,22 @@ public class SearchArtistFragment extends ListFragment {
     }
 
     public void refreshSearchResults(String searchQuery) {
-        Toast.makeText(getActivity(), String.format(getString(R.string.searching_for),searchQuery),Toast.LENGTH_SHORT).show();
+        if (latestToast != null) {
+            //Cancel previous toast if needed.
+            latestToast.cancel();
+            //Thanks code-reviewer for the idea!
+            /*
+            (Nitpick) "Notice, what happens when you search many times for artists.
+            (The user can make a mistake and want to correct input. )
+            The user has to wait until the long sequence of toasts is displayed.
+            It can be considered annoying and decrease the quality of user experience.
+            It is also very simple to implement, the method .cancel() makes a toast disappear
+            (it's important to check whether the toast is null and to declare an appropriate
+            member variable)."
+             */
+        }
+        latestToast = Toast.makeText(getActivity(), String.format(getString(R.string.searching_for), searchQuery), Toast.LENGTH_SHORT);
+        latestToast.show();
         if (mSpotifyApi == null) {
             //Create SpotifyInstance only when needed
             //This could be an expensive call,
@@ -149,7 +167,18 @@ public class SearchArtistFragment extends ListFragment {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "SpotifyError " + spotifyError.getErrorDetails(), Toast.LENGTH_LONG).show();
+                        //check common errors
+                        if (RetrofitError.Kind.NETWORK == spotifyError.getRetrofitError().getKind()){
+                            //No network connection
+                            Util.handleNoNetwork(getActivity());
+                            return;
+                        }
+                        //Other errors, just show and hope users can fix it.
+                        if (spotifyError.getErrorDetails() != null) {
+                            Toast.makeText(getActivity(), getString(R.string.spotify_error) + ":\n(" + spotifyError.getErrorDetails().status + ") " + spotifyError.getErrorDetails().message, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), getString(R.string.spotify_error) + ":\n" + spotifyError.getRetrofitError().getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
