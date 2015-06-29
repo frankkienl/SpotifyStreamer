@@ -412,10 +412,9 @@ public class Util {
     public static String[][] iso3166_1_alpha_2_countryCodes_listedFAQ = new String[][]{
             {"AD", "Andorra"},//
             {"AR", "Argentina"},//
-            {"AS", "American Samoa"},//United States of America
             {"AT", "Austria"},//
             {"AU", "Australia"},//
-             {"AX", "Åland Islands"},//Finland
+            {"AX", "Åland Islands"},//Finland
             {"BE", "Belgium"},//
             {"BM", "Bermuda"},//United Kingdom
             {"BO", "Bolivia, Plurinational State of"},//Bolivia
@@ -486,16 +485,37 @@ public class Util {
             //It is in ISO 3166, as IC (reserved), according to
             //https://en.wikipedia.org/wiki/Canary_Islands
             {"IC","Canary Islands"},//Spain
-
+            //Skipped Ceuta and Melilla
+            {"SE","Sweden"},//
+            {"CH","Switzerland"},//
+            {"TW","Taiwan"},//
+            {"UK","United Kingdom"},//
+            {"BM", "Bermuda"},//United Kingdom
+            {"FK","Falkland Islands"},//United Kingdom
+            {"GI","Gibraltar"},//United Kingdom
+            {"PN","Pitcairn Islands"},//United Kingdom
+            {"SH","Saint Helena, Ascension and Tristan da Cunha"},//United Kingdom
+            //Skipped Sovereign Base Areas of Akrotiri and Dhekelia (Cyprus)
+            {"GG","Guernsey"},//United Kingdom
+            {"IM","Isle of Man"},//United Kingdom
+            {"JE","Jersey"},//United Kingdom
+            {"UY","Uruguay"},//
+            {"US","United States of America"},//
+            {"AS", "American Samoa"},//United States of America
+            {"GU","Guam"},//US
+            {"MP","Northern Mariana Islands"},//US
+            {"PR","Puerto Rico"},//US
+            {"UM","United States Minor Outlying Islands"},//US
+            {"VI","Virgin Islands, U.S."},//US
     };
 
-    public static int getIndexByCountryCode(String countryCode){
-        for (int i = 0; i < Util.iso3166_1_alpha_2_countryCodes.length; i++){
-            if (Util.iso3166_1_alpha_2_countryCodes[i][0].equalsIgnoreCase(countryCode)){
+    public static int getIndexByCountryCode(String countryCode, String[][] list){
+        for (int i = 0; i < list.length; i++){
+            if (list[i][0].equalsIgnoreCase(countryCode)){
                 return i;
             }
         }
-        return -1; //not found, yes this will crash the app
+        return -1; //not found
     }
 
     /**
