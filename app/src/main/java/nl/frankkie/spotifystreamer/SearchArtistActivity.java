@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import nl.frankkie.spotifystreamer.model.MyArtist;
+
 public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
 
     private CharSequence mTitle;
@@ -52,7 +54,7 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
     }
 
     @Override
-    public void onItemSelected(SearchArtistAdapter.MyArtist artist) {
+    public void onItemSelected(MyArtist artist) {
         if (mTwoPane){
             Bundle arguments = new Bundle();
             arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);

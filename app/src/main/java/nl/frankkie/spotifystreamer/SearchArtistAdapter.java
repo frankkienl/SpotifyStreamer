@@ -1,7 +1,6 @@
 package nl.frankkie.spotifystreamer;
 
 import android.content.Context;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 
 import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
+import nl.frankkie.spotifystreamer.model.MyArtist;
 
 /**
  * Created by FrankkieNL on 9-6-2015.
@@ -30,8 +30,8 @@ public class SearchArtistAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    //Setting the Artists from the Spotify API
     public void setArtistsPager(ArtistsPager artistsPager) {
-
         artists = new ArrayList<MyArtist>();
         for (Artist artist : artistsPager.artists.items) {
             MyArtist myArtist = new MyArtist(artist, context);
@@ -43,6 +43,17 @@ public class SearchArtistAdapter extends BaseAdapter {
             //No search results
             Toast.makeText(context, context.getString(R.string.no_search_results_refine), Toast.LENGTH_LONG).show();
         }
+    }
+
+    //Setting the Artist from savedInstanceState
+    public void setMyArtistArray(Parcelable[] myArtistArray) {
+        artists = new ArrayList<MyArtist>();
+        if (myArtistArray != null && myArtistArray.length != 0) {
+            for (Parcelable artist : myArtistArray) {
+                artists.add((MyArtist) artist);
+            }
+        }
+        notifyDataSetChanged();
     }
 
     public ArrayList<MyArtist> getArtists() {
@@ -91,7 +102,6 @@ public class SearchArtistAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     public static class ViewHolder {
 
         public final ImageView imageView;
@@ -100,57 +110,6 @@ public class SearchArtistAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             imageView = (ImageView) view.findViewById(R.id.artist_image);
             artistName = (TextView) view.findViewById(R.id.artist_name);
-        }
-    }
-
-    /**
-     * Creating my own Artist object,
-     * as the Artist object from the library is not Parcelable.
-     */
-    public static class MyArtist implements Parcelable {
-
-        String artistName;
-        String image;
-        String id;
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(artistName);
-            dest.writeString(image);
-            dest.writeString(id);
-        }
-
-        public static final Parcelable.Creator<MyArtist> CREATOR =
-                new Parcelable.Creator<MyArtist>() {
-
-                    @Override
-                    public MyArtist createFromParcel(Parcel source) {
-                        return new MyArtist(source);
-                    }
-
-                    @Override
-                    public MyArtist[] newArray(int size) {
-                        return new MyArtist[size];
-                    }
-                };
-
-        private MyArtist(Parcel in) {
-            //recreate from parcel
-            artistName = in.readString();
-            image = in.readString();
-            id = in.readString();
-        }
-
-        public MyArtist(Artist artist, Context context) {
-            //create from Artist-object from library
-            artistName = artist.name;
-            image = Util.getImageWithBestSize(artist.images, (int) (48 * context.getResources().getDisplayMetrics().density));
-            id = artist.id;
         }
     }
 }
