@@ -24,7 +24,9 @@ import nl.frankkie.spotifystreamer.model.MyArtist;
 public class SearchArtistAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<MyArtist> artists;
+    //Prevent NullPointerException
+    //Thanks Udacity Reviewer ;-) !
+    ArrayList<MyArtist> artists = new ArrayList<MyArtist>();
 
     public SearchArtistAdapter(Context context) {
         this.context = context;
@@ -32,7 +34,7 @@ public class SearchArtistAdapter extends BaseAdapter {
 
     //Setting the Artists from the Spotify API
     public void setArtistsPager(ArtistsPager artistsPager) {
-        artists = new ArrayList<MyArtist>();
+        artists.clear();
         for (Artist artist : artistsPager.artists.items) {
             MyArtist myArtist = new MyArtist(artist, context);
             artists.add(myArtist);
@@ -47,7 +49,7 @@ public class SearchArtistAdapter extends BaseAdapter {
 
     //Setting the Artist from savedInstanceState
     public void setMyArtistArray(Parcelable[] myArtistArray) {
-        artists = new ArrayList<MyArtist>();
+        artists.clear();
         if (myArtistArray != null && myArtistArray.length != 0) {
             for (Parcelable artist : myArtistArray) {
                 artists.add((MyArtist) artist);
@@ -62,9 +64,6 @@ public class SearchArtistAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (artists == null) {
-            return 0;
-        }
         return artists.size();
     }
 

@@ -24,14 +24,14 @@ import nl.frankkie.spotifystreamer.model.MyTrack;
 public class TopTracksAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<MyTrack> myTracks;
+    ArrayList<MyTrack> myTracks = new ArrayList<MyTrack>();
 
     public TopTracksAdapter(Context context){
         this.context = context;
     }
 
     public void setTracks(Tracks tracks) {
-        myTracks = new ArrayList<MyTrack>();
+        myTracks.clear();
         for (Track track : tracks.tracks){
             MyTrack myTrack = new MyTrack(track,context);
             myTracks.add(myTrack);
@@ -40,7 +40,7 @@ public class TopTracksAdapter extends BaseAdapter {
     }
 
     public void setMyTracksArray(Parcelable[] myTracksArray){
-        myTracks = new ArrayList<MyTrack>();
+        myTracks.clear();
         if (myTracksArray != null && myTracksArray.length != 0){
             for (Parcelable track : myTracksArray){
                 myTracks.add((MyTrack) track);
@@ -55,9 +55,6 @@ public class TopTracksAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (myTracks == null) {
-            return 0;
-        }
         return myTracks.size();
     }
 

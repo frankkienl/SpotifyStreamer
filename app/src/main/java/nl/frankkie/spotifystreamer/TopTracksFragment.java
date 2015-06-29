@@ -74,7 +74,10 @@ public class TopTracksFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mListView = getListView();
-        mAdapter = new TopTracksAdapter(getActivity());
+        if (mAdapter == null) {
+            //Don't recreate if already created by savedInstanceState
+            mAdapter = new TopTracksAdapter(getActivity());
+        }
         mListView.setAdapter(mAdapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,7 +90,11 @@ public class TopTracksFragment extends ListFragment {
         mArtistName = getArguments().getString(ARG_ARTIST_NAME);
         mArtistId = getArguments().getString(ARG_ARTIST_ID);
 
-        searchTopTracks();
+        if (mAdapter.getCount() == 0) {
+            //Don't re-download when already filled by savedInstanceState
+            //Only download when list is empty.
+            searchTopTracks();
+        }
     }
 
     public void searchTopTracks() {
