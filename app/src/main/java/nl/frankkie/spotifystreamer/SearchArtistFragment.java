@@ -41,6 +41,10 @@ public class SearchArtistFragment extends ListFragment {
     Callbacks mCallbacks;
     //save lastest Toast-message, to be able to cancel it when needed.
     private Toast latestToast;
+    //Set active in TwoPane-mode
+    private boolean mTwoPane = false;
+    private int mActivatedPosition = ListView.INVALID_POSITION;
+    public static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     public interface Callbacks {
         public void onItemSelected(MyArtist artist);
@@ -64,6 +68,9 @@ public class SearchArtistFragment extends ListFragment {
         if (mAdapter != null){
             //Put in bundle as array
             outState.putParcelableArray(SAVED_ARTISTS, mAdapter.getArtists().toArray(new MyArtist[mAdapter.getCount()]));
+        }
+        if (mActivatedPosition != ListView.INVALID_POSITION) {
+            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
     }
 
@@ -98,8 +105,15 @@ public class SearchArtistFragment extends ListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mCallbacks.onItemSelected((MyArtist) mAdapter.getItem(position));
+                setActivatedPosition(position);
             }
         });
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+        }
 
         EditText searchBox = (EditText) view.findViewById(R.id.search_artist_edittext);
 
@@ -183,7 +197,7 @@ public class SearchArtistFragment extends ListFragment {
                     @Override
                     public void run() {
                         //check common errors
-                        if (RetrofitError.Kind.NETWORK == spotifyError.getRetrofitError().getKind()){
+                        if (RetrofitError.Kind.NETWORK == spotifyError.getRetrofitError().getKind()) {
                             //No network connection
                             Util.handleNoNetwork(getActivity());
                             return;
@@ -198,5 +212,23 @@ public class SearchArtistFragment extends ListFragment {
                 });
             }
         });
+    }
+
+    public void setActivateOnItemClick(boolean activateOnItemClick){
+        mListView.setChoiceMode(activateOnItemClick
+                ? ListView.CHOICE_MODE_SINGLE
+                : ListView.CHOICE_MODE_NONE);
+
+        mTwoPane = activateOnItemClick;
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            mListView.setItemChecked(mActivatedPosition, false);
+        } else {
+            mListView.setItemChecked(position, true);
+        }
+
+        mActivatedPosition = position;
     }
 }

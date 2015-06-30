@@ -28,6 +28,9 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
         //This is present when the twopane layout is shown.
         if (findViewById(R.id.toptracks_fragment_container) != null) {
             mTwoPane = true;
+
+            //Turn on the activate state in the listview, when in twopane mode
+            ((SearchArtistFragment)getFragmentManager().findFragmentById(R.id.search_artist_fragment)).setActivateOnItemClick(true);
         }
     }
 
