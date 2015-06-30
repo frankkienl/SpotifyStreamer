@@ -50,6 +50,8 @@ public class SearchArtistFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setRetainInstance(true);
+        //Now using savedInstanceState instead of setRetainInstance
+        //Thanks Udacity Reviewer !!
         if (savedInstanceState != null){
             mAdapter = new SearchArtistAdapter(getActivity());
             mAdapter.setMyArtistArray(savedInstanceState.getParcelableArray(SAVED_ARTISTS));

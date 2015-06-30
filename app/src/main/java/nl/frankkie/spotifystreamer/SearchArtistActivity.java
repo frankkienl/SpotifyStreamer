@@ -2,6 +2,7 @@ package nl.frankkie.spotifystreamer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import nl.frankkie.spotifystreamer.model.MyArtist;
 
 public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
 
+    public static final String TOP_TRACKS_FRAGMENT_TAG = "top_tracks_fragment_tag";
     private CharSequence mTitle;
     Toolbar mToolbar;
     private boolean mTwoPane;
@@ -59,11 +61,23 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
             Bundle arguments = new Bundle();
             arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
             arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
-            TopTracksFragment fragment = new TopTracksFragment();
-            fragment.setArguments(arguments);
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.toptracks_fragment_container, fragment)
-                    .commit();
+            TopTracksFragment fragment;
+            fragment = (TopTracksFragment) getFragmentManager().findFragmentByTag(TOP_TRACKS_FRAGMENT_TAG);
+            //Don't re-create fragment just use existing when possible.
+            //Thanks Udacity Reviewer !!
+            if (fragment == null){
+                fragment = new TopTracksFragment();
+                fragment.setArguments(arguments);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.toptracks_fragment_container, fragment, TOP_TRACKS_FRAGMENT_TAG)
+                        .commit();
+            } else {
+                //Existing, just replace arguments.
+                //http://stackoverflow.com/questions/10364478/got-exception-fragment-already-active
+                fragment.getArguments().putAll(arguments);
+                //make the fragment refresh results
+                fragment.searchTopTracks();
+            }
         } else {
             Intent detailIntent = new Intent(this, TopTracksActivity.class);
             detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);

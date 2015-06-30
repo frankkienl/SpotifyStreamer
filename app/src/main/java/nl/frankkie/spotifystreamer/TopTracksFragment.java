@@ -87,9 +87,6 @@ public class TopTracksFragment extends ListFragment {
             }
         });
 
-        mArtistName = getArguments().getString(ARG_ARTIST_NAME);
-        mArtistId = getArguments().getString(ARG_ARTIST_ID);
-
         if (mAdapter.getCount() == 0) {
             //Don't re-download when already filled by savedInstanceState
             //Only download when list is empty.
@@ -98,6 +95,9 @@ public class TopTracksFragment extends ListFragment {
     }
 
     public void searchTopTracks() {
+        mArtistName = getArguments().getString(ARG_ARTIST_NAME);
+        mArtistId = getArguments().getString(ARG_ARTIST_ID);
+
         //Get chosen location for SharedPreferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String countryCode = prefs.getString("country", getString(R.string.default_countrycode)); //default is dependant on system-language
