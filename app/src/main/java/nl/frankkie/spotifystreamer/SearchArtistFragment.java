@@ -183,6 +183,10 @@ public class SearchArtistFragment extends ListFragment {
                     public void run() {
                         //Using mHandler.post, as this needs to be on the on the UI-thread
                         mAdapter.setArtistsPager(artistsPager);
+                        //Reset selection in the ListView
+                        setActivatedPosition(ListView.INVALID_POSITION);
+                        //Reset TopTracksFragment (if twopane mode)
+                        mCallbacks.onItemSelected(null);
                     }
                 });
                 Log.v(TAG, "Spotify Response received");

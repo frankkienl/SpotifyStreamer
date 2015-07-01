@@ -98,6 +98,12 @@ public class TopTracksFragment extends ListFragment {
         mArtistName = getArguments().getString(ARG_ARTIST_NAME);
         mArtistId = getArguments().getString(ARG_ARTIST_ID);
 
+        if ("".equals(mArtistId)){
+            //reset list
+            mAdapter.setMyTracksArray(new MyTrack[0]);
+            return;
+        }
+
         //Get chosen location for SharedPreferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String countryCode = prefs.getString("country", getString(R.string.default_countrycode)); //default is dependant on system-language

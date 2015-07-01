@@ -2,7 +2,6 @@ package nl.frankkie.spotifystreamer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -30,20 +29,20 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
             mTwoPane = true;
 
             //Turn on the activate state in the listview, when in twopane mode
-            ((SearchArtistFragment)getFragmentManager().findFragmentById(R.id.search_artist_fragment)).setActivateOnItemClick(true);
+            ((SearchArtistFragment) getFragmentManager().findFragmentById(R.id.search_artist_fragment)).setActivateOnItemClick(true);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true; //true as in: yes, use menu.
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             return true; //true as in: handled.
@@ -60,15 +59,21 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
 
     @Override
     public void onItemSelected(MyArtist artist) {
-        if (mTwoPane){
+        if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
-            arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+            if (artist == null) {
+                //To reset the TopTracks Fragment
+                arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, "");
+                arguments.putString(TopTracksFragment.ARG_ARTIST_ID, "");
+            } else {
+                arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
+                arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+            }
             TopTracksFragment fragment;
             fragment = (TopTracksFragment) getFragmentManager().findFragmentByTag(TOP_TRACKS_FRAGMENT_TAG);
             //Don't re-create fragment just use existing when possible.
             //Thanks Udacity Reviewer !!
-            if (fragment == null){
+            if (fragment == null) {
                 fragment = new TopTracksFragment();
                 fragment.setArguments(arguments);
                 getFragmentManager().beginTransaction()
@@ -83,8 +88,13 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
             }
         } else {
             Intent detailIntent = new Intent(this, TopTracksActivity.class);
-            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
-            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+            if (artist == null) {
+                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, "");
+                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, "");
+            } else {
+                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
+                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+            }
             startActivity(detailIntent);
         }
     }
