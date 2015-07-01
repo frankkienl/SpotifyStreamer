@@ -65,9 +65,11 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
                 //To reset the TopTracks Fragment
                 arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, "");
                 arguments.putString(TopTracksFragment.ARG_ARTIST_ID, "");
+                mToolbar.setSubtitle("");
             } else {
                 arguments.putString(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
                 arguments.putString(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+                mToolbar.setSubtitle(artist.artistName);
             }
             TopTracksFragment fragment;
             fragment = (TopTracksFragment) getFragmentManager().findFragmentByTag(TOP_TRACKS_FRAGMENT_TAG);
@@ -87,14 +89,13 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
                 fragment.searchTopTracks();
             }
         } else {
-            Intent detailIntent = new Intent(this, TopTracksActivity.class);
             if (artist == null) {
-                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, "");
-                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, "");
-            } else {
-                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
-                detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
+                //Don't launch empty screen on new search
+                return;
             }
+            Intent detailIntent = new Intent(this, TopTracksActivity.class);
+            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_NAME, artist.artistName);
+            detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             startActivity(detailIntent);
         }
     }
