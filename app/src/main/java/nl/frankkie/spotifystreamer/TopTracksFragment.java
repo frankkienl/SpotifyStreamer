@@ -42,6 +42,11 @@ public class TopTracksFragment extends ListFragment {
     String mArtistName;
     String mArtistId;
     Handler mHandler = new Handler();
+    Callbacks mCallbacks;
+
+    public interface Callbacks {
+        public void onTrackSelected(String trackId, String trackName, String artistName, String albumName, String albumImage);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,12 @@ public class TopTracksFragment extends ListFragment {
             mAdapter = new TopTracksAdapter(getActivity());
             mAdapter.setMyTracksArray(savedInstanceState.getParcelableArray(SAVED_TRACKS));
         }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mCallbacks = (Callbacks) getActivity();
     }
 
     @Override
@@ -83,7 +94,9 @@ public class TopTracksFragment extends ListFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_LONG).show();
+                MyTrack track = (MyTrack) mAdapter.getItem(position);
+                mCallbacks.onTrackSelected(track.id,);
             }
         });
 

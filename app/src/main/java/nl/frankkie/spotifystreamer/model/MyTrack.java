@@ -15,6 +15,7 @@ public class MyTrack implements Parcelable {
     public String title;
     public String album;
     public String image;
+    public String trackId;
 
     @Override
     public int describeContents() {
@@ -26,6 +27,7 @@ public class MyTrack implements Parcelable {
         dest.writeString(title);
         dest.writeString(album);
         dest.writeString(image);
+        dest.writeString(trackId);
     }
 
     public static final Parcelable.Creator<MyTrack> CREATOR =
@@ -47,11 +49,13 @@ public class MyTrack implements Parcelable {
         title = in.readString();
         album = in.readString();
         image = in.readString();
+        trackId = in.readString();
     }
 
     public MyTrack(Track track, Context context){
         title = track.name;
         album = track.album.name;
         image = Util.getImageWithBestSize(track.album.images,(int) (48 * context.getResources().getDisplayMetrics().density));
+        trackId = track.id;
     }
 }

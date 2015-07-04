@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import nl.frankkie.spotifystreamer.model.MyArtist;
 
-public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks {
+public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks, TopTracksFragment.Callbacks{
 
     public static final String TOP_TRACKS_FRAGMENT_TAG = "top_tracks_fragment_tag";
     private CharSequence mTitle;
@@ -98,6 +98,11 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
             detailIntent.putExtra(TopTracksFragment.ARG_ARTIST_ID, artist.id);
             startActivity(detailIntent);
         }
+    }
+
+    @Override
+    public void onTrackSelected(String trackId, String trackName, String artistName, String albumName, String albumImage) {
+        //TODO: implement this
     }
 }
 
