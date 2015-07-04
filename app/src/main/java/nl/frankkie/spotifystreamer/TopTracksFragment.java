@@ -96,7 +96,7 @@ public class TopTracksFragment extends ListFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_LONG).show();
                 MyTrack track = (MyTrack) mAdapter.getItem(position);
-                mCallbacks.onTrackSelected(track.id,);
+                mCallbacks.onTrackSelected(track.trackId,track.title,mArtistName,track.album,track.image);
             }
         });
 
