@@ -88,7 +88,7 @@ public class TopTracksAdapter extends BaseAdapter {
         //I'm not a huge fan of this chaining.
         //I call this 'Breiwerk' Dutch for 'Stitching'.
         Picasso.with(context)
-                .load(track.image)
+                .load(track.imageSmall)
                 .placeholder(R.drawable.ic_artist_image_error)
                 .error(R.drawable.ic_artist_image_error)
                 .into(viewHolder.image);

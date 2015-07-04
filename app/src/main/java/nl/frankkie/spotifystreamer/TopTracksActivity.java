@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import nl.frankkie.spotifystreamer.model.MyTrack;
+
 /**
  * Created by FrankkieNL on 16-6-2015.
  */
@@ -83,15 +85,11 @@ public class TopTracksActivity extends ActionBarActivity implements TopTracksFra
     }
 
     @Override
-    public void onTrackSelected(String trackId, String trackName, String artistName, String albumName, String albumImage) {
-        //User selected track to play, launch Player,
+    public void onTrackSelected(MyTrack track, String artistName) {    //User selected track to play, launch Player,
         //by starting PlayerActivity, as this is not twopane-mode
         Bundle bundle = new Bundle();
-        bundle.putString(PlayerFragment.TRACK_ID, trackId);
-        bundle.putString(PlayerFragment.TRACK_NAME, trackName);
+        bundle.putParcelable(PlayerFragment.TRACK_MYTRACK, track);
         bundle.putString(PlayerFragment.TRACK_ARTIST, artistName);
-        bundle.putString(PlayerFragment.TRACK_ALBUM, albumName);
-        bundle.putString(PlayerFragment.TRACK_ALBUM_IMAGE, albumImage);
 
         Intent i = new Intent(this, PlayerActivity.class);
         i.putExtras(bundle);

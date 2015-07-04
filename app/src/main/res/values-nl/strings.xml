@@ -16,4 +16,5 @@
     <string name="pick_country">Kies land</string>
     <string name="searc_artist">Zoek artiest</string>
     <string name="error_no_network">Kan niet verbinden met Spotify. Controleer uw internet verbinding.</string>
+    <string name="player">Speler</string>
 </resources>

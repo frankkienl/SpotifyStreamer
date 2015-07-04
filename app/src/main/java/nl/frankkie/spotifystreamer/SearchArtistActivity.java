@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import nl.frankkie.spotifystreamer.model.MyArtist;
+import nl.frankkie.spotifystreamer.model.MyTrack;
 
 public class SearchArtistActivity extends ActionBarActivity implements SearchArtistFragment.Callbacks, TopTracksFragment.Callbacks{
 
@@ -101,14 +102,11 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
     }
 
     @Override
-    public void onTrackSelected(String trackId, String trackName, String artistName, String albumName, String albumImage) {
+    public void onTrackSelected(MyTrack track, String artistName) {
         //This is twopane mode, otherwise TopTracksActivity would have gotten this callback
         Bundle bundle = new Bundle();
-        bundle.putString(PlayerFragment.TRACK_ID, trackId);
-        bundle.putString(PlayerFragment.TRACK_NAME, trackName);
+        bundle.putParcelable(PlayerFragment.TRACK_MYTRACK, track);
         bundle.putString(PlayerFragment.TRACK_ARTIST, artistName);
-        bundle.putString(PlayerFragment.TRACK_ALBUM, albumName);
-        bundle.putString(PlayerFragment.TRACK_ALBUM_IMAGE, albumImage);
 
         PlayerFragment fragment;
         fragment = new PlayerFragment();

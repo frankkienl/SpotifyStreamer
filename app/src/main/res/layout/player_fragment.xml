@@ -59,7 +59,6 @@
         android:layout_height="wrap_content" />
 <!-- Track info //-->
     <LinearLayout
-        android:layout_above="@id/player_seekbar"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -68,6 +67,7 @@
             android:text="Sample Artist"
             android:gravity="center_horizontal"
             android:textSize="22sp"
+            android:ellipsize="marquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
@@ -75,16 +75,19 @@
             android:text="Sample Album"
             android:gravity="center_horizontal"
             android:textSize="18sp"
+            android:ellipsize="marquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/player_album_image"
             android:src="@drawable/ic_artist_image_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/player_track"
+            android:id="@+id/player_trackname"
             android:text="Sample Track"
             android:textSize="24sp"
+            android:ellipsize="marquee"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -1,8 +1,10 @@
 package nl.frankkie.spotifystreamer.model;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.WindowManager;
 
 import kaaes.spotify.webapi.android.models.Track;
 import nl.frankkie.spotifystreamer.Util;
@@ -12,10 +14,11 @@ import nl.frankkie.spotifystreamer.Util;
  */
 public class MyTrack implements Parcelable {
 
+    public String trackId;
     public String title;
     public String album;
-    public String image;
-    public String trackId;
+    public String imageSmall;
+    public String imageBig;
 
     @Override
     public int describeContents() {
@@ -24,10 +27,11 @@ public class MyTrack implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(trackId);
         dest.writeString(title);
         dest.writeString(album);
-        dest.writeString(image);
-        dest.writeString(trackId);
+        dest.writeString(imageSmall);
+        dest.writeString(imageBig);
     }
 
     public static final Parcelable.Creator<MyTrack> CREATOR =
@@ -46,16 +50,21 @@ public class MyTrack implements Parcelable {
 
     private MyTrack(Parcel in){
         //recreate from parcel
+        trackId = in.readString();
         title = in.readString();
         album = in.readString();
-        image = in.readString();
-        trackId = in.readString();
+        imageSmall = in.readString();
+        imageBig = in.readString();
     }
 
     public MyTrack(Track track, Context context){
+        trackId = track.id;
         title = track.name;
         album = track.album.name;
-        image = Util.getImageWithBestSize(track.album.images,(int) (48 * context.getResources().getDisplayMetrics().density));
-        trackId = track.id;
+        imageSmall = Util.getImageWithBestSize(track.album.images,(int) (48 * context.getResources().getDisplayMetrics().density));
+        Point displaySize = new Point();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(displaySize);
+        //Get image that would fill width of screen
+        imageBig = Util.getImageWithBestSize(track.album.images,(int) (displaySize.x * context.getResources().getDisplayMetrics().density));
     }
 }
