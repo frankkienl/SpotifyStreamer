@@ -59,6 +59,9 @@
         android:layout_height="wrap_content" />
     <!-- Track info //-->
     <LinearLayout
+        android:layout_above="@id/player_seekbar"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
