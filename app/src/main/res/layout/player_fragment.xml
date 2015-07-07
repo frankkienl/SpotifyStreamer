@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/player_seekbar_time_left"
+        android:id="@+id/player_seekbar_time_elapsed"
         android:text="0:00"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/player_seekbar_time_right"
+        android:id="@+id/player_seekbar_time_total"
         android:text="0:30"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"

@@ -16,4 +16,5 @@
     <string name="searc_artist">Search artist</string>
     <string name="error_no_network">Cannot connect to Spotify. Please check your internet connection.</string>
     <string name="player">Player</string>
+    <string name="cannot_play">Cannot play track</string>
 </resources>
