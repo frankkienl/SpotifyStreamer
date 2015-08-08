@@ -58,6 +58,7 @@ public class PlayerFragment extends DialogFragment {
     ImageButton previousBtn;
     ImageButton nextBtn;
     ImageButton playPauseBtn;
+    ImageView albumImage;
     //
     Runnable runElapsedTime = new Runnable() {
         @Override
@@ -97,6 +98,7 @@ public class PlayerFragment extends DialogFragment {
         tvAlbum = (TextView) v.findViewById(R.id.player_album);
         tvArtist = (TextView) v.findViewById(R.id.player_artist);
         tvTrackname = (TextView) v.findViewById(R.id.player_trackname);
+        albumImage = (ImageView) v.findViewById(R.id.player_album_image);
         previousBtn = (ImageButton) v.findViewById(R.id.player_btn_previous);
         nextBtn = (ImageButton) v.findViewById(R.id.player_btn_next);
         playPauseBtn = (ImageButton) v.findViewById(R.id.player_btn_play_pause);
@@ -119,16 +121,14 @@ public class PlayerFragment extends DialogFragment {
 
             }
         });
-        Picasso.with(getActivity())
-                .load(currentMyTrack.imageBig)
-                .placeholder(R.drawable.ic_artist_image_error)
-                .error(R.drawable.ic_artist_image_error)
-                .into((ImageView) v.findViewById(R.id.player_album_image));
         //
         playPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Play / Pause
+                if (mediaPlayer == null){
+                    return; //prevent NullPointerException
+                }
                 if (mediaPlayer.isPlaying()) {
                     //mediaPlayer.stop();
                     mediaPlayer.pause();
@@ -178,10 +178,17 @@ public class PlayerFragment extends DialogFragment {
             mediaPlayer = null;
         }
         seekBar.setProgress(0);
+        tvElapsedTime.setText("0:00");
         tvAlbum.setText(currentMyTrack.album);
         tvArtist.setText(currentArtists);
         tvTrackname.setText(currentMyTrack.title);
-
+        //
+        Picasso.with(getActivity())
+                .load(currentMyTrack.imageBig)
+                .placeholder(R.drawable.ic_artist_image_error)
+                .error(R.drawable.ic_artist_image_error)
+                .into(albumImage);
+        //
         SpotifyApi api = new SpotifyApi();
         SpotifyService service = api.getService();
         service.getTrack(currentMyTrack.trackId, new Callback<Track>() {
