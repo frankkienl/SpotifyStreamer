@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class TopTracksFragment extends ListFragment {
     Callbacks mCallbacks;
 
     public interface Callbacks {
-        public void onTrackSelected(MyTrack track, String artistName);
+        public void onTrackSelected(ArrayList<MyTrack> tracks, int index, String artistName);
     }
 
     @Override
@@ -94,9 +95,8 @@ public class TopTracksFragment extends ListFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getActivity(), getString(R.string.not_implemented), Toast.LENGTH_LONG).show();
-                MyTrack track = (MyTrack) mAdapter.getItem(position);
-                mCallbacks.onTrackSelected(track,mArtistName);
+                //I give the whole list, so the user can skip to next song in PlayerFragment.
+                mCallbacks.onTrackSelected(mAdapter.getMyTracks(),position, mArtistName);
             }
         });
 

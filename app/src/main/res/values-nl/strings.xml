@@ -18,4 +18,5 @@
     <string name="error_no_network">Kan niet verbinden met Spotify. Controleer uw internet verbinding.</string>
     <string name="player">Speler</string>
     <string name="cannot_play">Kan nummer niet afspelen</string>
+    <string name="mediaplayer_not_prepared">De mediaspeler is nog niet voorbereid. Even geduld aub. Muziek begint te spelen zodra de mediaspeler is voorbereid.</string>
 </resources>

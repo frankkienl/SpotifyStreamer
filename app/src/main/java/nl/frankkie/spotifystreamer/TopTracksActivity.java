@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 import nl.frankkie.spotifystreamer.model.MyTrack;
 
 /**
@@ -38,7 +40,7 @@ public class TopTracksActivity extends ActionBarActivity implements TopTracksFra
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void initUI(Bundle savedInstanceState){
+    public void initUI(Bundle savedInstanceState) {
         //No need for a twopane version of top tracks
         setContentView(R.layout.activity_toptracks);
 
@@ -85,11 +87,13 @@ public class TopTracksActivity extends ActionBarActivity implements TopTracksFra
     }
 
     @Override
-    public void onTrackSelected(MyTrack track, String artistName) {    //User selected track to play, launch Player,
+    public void onTrackSelected(ArrayList<MyTrack> tracks, int index, String artistName) {
+        //User selected track to play, launch Player,
         //by starting PlayerActivity, as this is not twopane-mode
         Bundle bundle = new Bundle();
-        bundle.putParcelable(PlayerFragment.TRACK_MYTRACK, track);
+        bundle.putParcelableArrayList(PlayerFragment.TRACK_MYTRACKS, tracks);
         bundle.putString(PlayerFragment.TRACK_ARTIST, artistName);
+        bundle.putInt(PlayerFragment.TRACK_POSITION, index);
 
         Intent i = new Intent(this, PlayerActivity.class);
         i.putExtras(bundle);

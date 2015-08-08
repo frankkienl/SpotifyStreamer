@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 import nl.frankkie.spotifystreamer.model.MyArtist;
 import nl.frankkie.spotifystreamer.model.MyTrack;
 
@@ -102,11 +104,12 @@ public class SearchArtistActivity extends ActionBarActivity implements SearchArt
     }
 
     @Override
-    public void onTrackSelected(MyTrack track, String artistName) {
+    public void onTrackSelected(ArrayList<MyTrack> tracks,int index, String artistName) {
         //This is twopane mode, otherwise TopTracksActivity would have gotten this callback
         Bundle bundle = new Bundle();
-        bundle.putParcelable(PlayerFragment.TRACK_MYTRACK, track);
+        bundle.putParcelableArrayList(PlayerFragment.TRACK_MYTRACKS, tracks);
         bundle.putString(PlayerFragment.TRACK_ARTIST, artistName);
+        bundle.putInt(PlayerFragment.TRACK_POSITION, index);
 
         PlayerFragment fragment;
         fragment = new PlayerFragment();
