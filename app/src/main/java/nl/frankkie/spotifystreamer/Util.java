@@ -36,27 +36,27 @@ public class Util {
             {"AT", "Austria"},
             {"AU", "Australia"},
             {"BE", "Belgium"},
-            {"CH","Switzerland"},
-            {"DE","Germany"},
-            {"DK","Denmark"},
-            {"ES","Spain"},
-            {"FI","Finland"},
-            {"FR","France"},
-            {"GB","United Kingdom of Great Britain and Northern Ireland"},
-            {"HK","Hong Kong"},
-            {"IE","Ireland"},
-            {"IT","Italy"},
-            {"LI","Liechtenstein"},
-            {"LU","Luxembourg"},
-            {"MC","Monaco"},
-            {"MX","Mexico"},
-            {"NL","Netherlands"},
-            {"NO","Norway"},
-            {"NZ","New Zealand"},
-            {"PL","Poland"},
-            {"SE","Sweden"},
-            {"SG","Singapore"},
-            {"US","United States of America"},
+            {"CH", "Switzerland"},
+            {"DE", "Germany"},
+            {"DK", "Denmark"},
+            {"ES", "Spain"},
+            {"FI", "Finland"},
+            {"FR", "France"},
+            {"GB", "United Kingdom of Great Britain and Northern Ireland"},
+            {"HK", "Hong Kong"},
+            {"IE", "Ireland"},
+            {"IT", "Italy"},
+            {"LI", "Liechtenstein"},
+            {"LU", "Luxembourg"},
+            {"MC", "Monaco"},
+            {"MX", "Mexico"},
+            {"NL", "Netherlands"},
+            {"NO", "Norway"},
+            {"NZ", "New Zealand"},
+            {"PL", "Poland"},
+            {"SE", "Sweden"},
+            {"SG", "Singapore"},
+            {"US", "United States of America"},
     };
 
     public static String[][] iso3166_1_alpha_2_countryCodes = new String[][]{
@@ -100,238 +100,238 @@ public class Util {
             {"BY", "Belarus"},
             {"BZ", "Belize"},
             //C
-            {"CA","Canada"},
-            {"CC","Cocos (Keeling) Islands"},
-            {"CD","Congo, the Democratic Republic of"},
-            {"CF","Central African Republic"},
-            {"CG","Congo"},
-            {"CH","Switzerland"},
-            {"CI","Côte d'Ivoire"},
-            {"CK","Cook Islands"},
-            {"CL","Chile"},
-            {"CM","Cameroon"},
-            {"CN","China"},
-            {"CO","Colombia"},
-            {"CR","Costa Rica"},
-            {"CU","Cuba"},
-            {"CV","Cabo Verde"},
-            {"CW","Curaçao"},
-            {"CX","Christmas Island"},
-            {"CY","Cyprus"},
-            {"CZ","Czech Republic"},
+            {"CA", "Canada"},
+            {"CC", "Cocos (Keeling) Islands"},
+            {"CD", "Congo, the Democratic Republic of"},
+            {"CF", "Central African Republic"},
+            {"CG", "Congo"},
+            {"CH", "Switzerland"},
+            {"CI", "Côte d'Ivoire"},
+            {"CK", "Cook Islands"},
+            {"CL", "Chile"},
+            {"CM", "Cameroon"},
+            {"CN", "China"},
+            {"CO", "Colombia"},
+            {"CR", "Costa Rica"},
+            {"CU", "Cuba"},
+            {"CV", "Cabo Verde"},
+            {"CW", "Curaçao"},
+            {"CX", "Christmas Island"},
+            {"CY", "Cyprus"},
+            {"CZ", "Czech Republic"},
             //D
-            {"DE","Germany"},
-            {"DJ","Djibouti"},
-            {"DK","Denmark"},
-            {"DM","Dominica"},
-            {"DO","Dominican Republic"},
-            {"DZ","Algeria"},
+            {"DE", "Germany"},
+            {"DJ", "Djibouti"},
+            {"DK", "Denmark"},
+            {"DM", "Dominica"},
+            {"DO", "Dominican Republic"},
+            {"DZ", "Algeria"},
             //E
-            {"EC","Ecuador"},
-            {"EE","Estonia"},
-            {"EG","Egypt"},
-            {"EH","Western Sahara"},
-            {"ER","Eritrea"},
-            {"ES","Spain"},
-            {"ET","Ethiopia"},
+            {"EC", "Ecuador"},
+            {"EE", "Estonia"},
+            {"EG", "Egypt"},
+            {"EH", "Western Sahara"},
+            {"ER", "Eritrea"},
+            {"ES", "Spain"},
+            {"ET", "Ethiopia"},
             //F
-            {"FI","Finland"},
-            {"FJ","Fiji"},
-            {"FK","Falkland Islands (Malvinas)"},
-            {"FM","Micronesia, Federated States of"},
-            {"FO","Faroe Islands"},
-            {"FR","France"},
+            {"FI", "Finland"},
+            {"FJ", "Fiji"},
+            {"FK", "Falkland Islands (Malvinas)"},
+            {"FM", "Micronesia, Federated States of"},
+            {"FO", "Faroe Islands"},
+            {"FR", "France"},
             //G
-            {"GA","Gabon"},
-            {"GB","United Kingdom of Great Britain and Northern Ireland"},
-            {"GD","Grenada"},
-            {"GE","Georgia"},
-            {"GF","French Guiana"},
-            {"GG","Guernsey"},
-            {"GH","Ghana"},
-            {"GI","Gibraltar"},
-            {"GL","Greenland"},
-            {"GM","Gambia"},
-            {"GN","Guinea"},
-            {"GP","Guadeloupe"},
-            {"GQ","Equatorial Guinea"},
-            {"GR","Greece"},
-            {"GS","South Georgia and the South Sandwich Islands"},
-            {"GT","Guatemala"},
-            {"GU","Guam"},
-            {"GW","Guinea-Bissau"},
-            {"GY","Guyana"},
+            {"GA", "Gabon"},
+            {"GB", "United Kingdom of Great Britain and Northern Ireland"},
+            {"GD", "Grenada"},
+            {"GE", "Georgia"},
+            {"GF", "French Guiana"},
+            {"GG", "Guernsey"},
+            {"GH", "Ghana"},
+            {"GI", "Gibraltar"},
+            {"GL", "Greenland"},
+            {"GM", "Gambia"},
+            {"GN", "Guinea"},
+            {"GP", "Guadeloupe"},
+            {"GQ", "Equatorial Guinea"},
+            {"GR", "Greece"},
+            {"GS", "South Georgia and the South Sandwich Islands"},
+            {"GT", "Guatemala"},
+            {"GU", "Guam"},
+            {"GW", "Guinea-Bissau"},
+            {"GY", "Guyana"},
             //H
-            {"HK","Hong Kong"},
-            {"HM","Heard Island and McDonalds Islands"},
-            {"HN","Honduras"},
-            {"HR","Croatia"},
-            {"HT","Haiti"},
-            {"HU","Hungary"},
+            {"HK", "Hong Kong"},
+            {"HM", "Heard Island and McDonalds Islands"},
+            {"HN", "Honduras"},
+            {"HR", "Croatia"},
+            {"HT", "Haiti"},
+            {"HU", "Hungary"},
             //I
-            {"ID","Indonesia"},
-            {"IE","Ireland"},
-            {"IL","Israel"},
-            {"IM","Isle of Man"},
-            {"IN","India"},
-            {"IO","British Indian Ocean Territory"},
-            {"IQ","Iraq"},
-            {"IR","Iran, Islamic Republic of"},
-            {"IS","Iceland"},
-            {"IT","Italy"},
+            {"ID", "Indonesia"},
+            {"IE", "Ireland"},
+            {"IL", "Israel"},
+            {"IM", "Isle of Man"},
+            {"IN", "India"},
+            {"IO", "British Indian Ocean Territory"},
+            {"IQ", "Iraq"},
+            {"IR", "Iran, Islamic Republic of"},
+            {"IS", "Iceland"},
+            {"IT", "Italy"},
             //J
-            {"JE","Jersey"},
-            {"JM","Jamaica"},
-            {"JO","Jordan"},
-            {"JP","Japan"},
+            {"JE", "Jersey"},
+            {"JM", "Jamaica"},
+            {"JO", "Jordan"},
+            {"JP", "Japan"},
             //K
-            {"KE","Kenya"},
-            {"KG","Kyrgyzstan"},
-            {"KH","Cambodia"},
-            {"KI","Kiribati"},
-            {"KM","Comoros"},
-            {"KN","Saint Kitts and Nevis"},
-            {"KP","Korea, Democratic People's Republic of"},
-            {"KR","Korea, Republic of"},
-            {"KW","Kuwait"},
-            {"KY","Cayman Islands"},
-            {"KZ","Kazakhstan"},
+            {"KE", "Kenya"},
+            {"KG", "Kyrgyzstan"},
+            {"KH", "Cambodia"},
+            {"KI", "Kiribati"},
+            {"KM", "Comoros"},
+            {"KN", "Saint Kitts and Nevis"},
+            {"KP", "Korea, Democratic People's Republic of"},
+            {"KR", "Korea, Republic of"},
+            {"KW", "Kuwait"},
+            {"KY", "Cayman Islands"},
+            {"KZ", "Kazakhstan"},
             //L
-            {"LA","Lao People's Democratic Republic"},
-            {"LB","Lebanon"},
-            {"LC","Saint Lucia"},
-            {"LI","Liechtenstein"},
-            {"LK","Sri Lanka"},
-            {"LR","Liberia"},
-            {"LS","Lesotho"},
-            {"LT","Lithuania"},
-            {"LU","Luxembourg"},
-            {"LV","Latvia"},
+            {"LA", "Lao People's Democratic Republic"},
+            {"LB", "Lebanon"},
+            {"LC", "Saint Lucia"},
+            {"LI", "Liechtenstein"},
+            {"LK", "Sri Lanka"},
+            {"LR", "Liberia"},
+            {"LS", "Lesotho"},
+            {"LT", "Lithuania"},
+            {"LU", "Luxembourg"},
+            {"LV", "Latvia"},
             //M
-            {"MA","Morocco"},
-            {"MC","Monaco"},
-            {"MD","Moldova, Republic of"},
-            {"ME","Montenegro"},
-            {"MF","Saint Martin (French part)"},
-            {"MG","Madagascar"},
-            {"MH","Marshall Islands"},
-            {"MK","Macedonia, the former Yugoslav Republic of"},
-            {"ML","Mali"},
-            {"MM","Myanmar"},
-            {"MN","Mongolia"},
-            {"MO","Macao"},
-            {"MP","Northern Mariana Islands"},
-            {"MQ","Martinique"},
-            {"MR","Mauritania"},
-            {"MS","Montserrat"},
-            {"MT","Malta"},
-            {"MU","Mauritius"},
-            {"MV","Maldives"},
-            {"MW","Malawi"},
-            {"MX","Mexico"},
-            {"MY","Malaysia"},
-            {"MZ","Mozambique"},
+            {"MA", "Morocco"},
+            {"MC", "Monaco"},
+            {"MD", "Moldova, Republic of"},
+            {"ME", "Montenegro"},
+            {"MF", "Saint Martin (French part)"},
+            {"MG", "Madagascar"},
+            {"MH", "Marshall Islands"},
+            {"MK", "Macedonia, the former Yugoslav Republic of"},
+            {"ML", "Mali"},
+            {"MM", "Myanmar"},
+            {"MN", "Mongolia"},
+            {"MO", "Macao"},
+            {"MP", "Northern Mariana Islands"},
+            {"MQ", "Martinique"},
+            {"MR", "Mauritania"},
+            {"MS", "Montserrat"},
+            {"MT", "Malta"},
+            {"MU", "Mauritius"},
+            {"MV", "Maldives"},
+            {"MW", "Malawi"},
+            {"MX", "Mexico"},
+            {"MY", "Malaysia"},
+            {"MZ", "Mozambique"},
             //N
-            {"NA","Namibia"},
-            {"NC","New Caledonia"},
-            {"NE","Niger"},
-            {"NF","Norfolk Island"},
-            {"NG","Nigeria"},
-            {"NI","Nicaragua"},
-            {"NL","Netherlands"},
-            {"NO","Norway"},
-            {"NP","Nepal"},
-            {"NR","Nauru"},
-            {"NU","Niue"},
-            {"NZ","New Zealand"},
+            {"NA", "Namibia"},
+            {"NC", "New Caledonia"},
+            {"NE", "Niger"},
+            {"NF", "Norfolk Island"},
+            {"NG", "Nigeria"},
+            {"NI", "Nicaragua"},
+            {"NL", "Netherlands"},
+            {"NO", "Norway"},
+            {"NP", "Nepal"},
+            {"NR", "Nauru"},
+            {"NU", "Niue"},
+            {"NZ", "New Zealand"},
             //O
-            {"OM","Oman"},
+            {"OM", "Oman"},
             //P
-            {"PA","Panama"},
-            {"PE","Peru"},
-            {"PF","French Polynesia"},
-            {"PG","Papua New Guinea"},
-            {"PH","Philippines"},
-            {"PK","Pakistan"},
-            {"PL","Poland"},
-            {"PM","Saint Pierre and Miquelon"},
-            {"PN","Pitcairn"},
-            {"PR","Puerto Rico"},
-            {"PS","Palestine, State of"},
-            {"PT","Portugal"},
-            {"PW","Palau"},
-            {"PY","Paraguay"},
+            {"PA", "Panama"},
+            {"PE", "Peru"},
+            {"PF", "French Polynesia"},
+            {"PG", "Papua New Guinea"},
+            {"PH", "Philippines"},
+            {"PK", "Pakistan"},
+            {"PL", "Poland"},
+            {"PM", "Saint Pierre and Miquelon"},
+            {"PN", "Pitcairn"},
+            {"PR", "Puerto Rico"},
+            {"PS", "Palestine, State of"},
+            {"PT", "Portugal"},
+            {"PW", "Palau"},
+            {"PY", "Paraguay"},
             //Q
-            {"QA","Qatar"},
+            {"QA", "Qatar"},
             //R
-            {"RE","Réunion"},
-            {"RO","Romania"},
-            {"RS","Serbia"},
-            {"RU","Russian Federation"},
-            {"RW","Rwanda"},
+            {"RE", "Réunion"},
+            {"RO", "Romania"},
+            {"RS", "Serbia"},
+            {"RU", "Russian Federation"},
+            {"RW", "Rwanda"},
             //S
-            {"SA","Saudi Arabia"},
-            {"SB","Solomon Islands"},
-            {"SC","Seychelles"},
-            {"SD","Sudan"},
-            {"SE","Sweden"},
-            {"SG","Singapore"},
-            {"SH","Saint Helena, Ascension and Tristan da Cunha"},
-            {"SI","Slovenia"},
-            {"SJ","Svalbard and Jan Mayen"},
-            {"SK","Slovakia"},
-            {"SL","Sierra Leone"},
-            {"SM","San Marino"},
-            {"SN","Senegal"},
-            {"SO","Somalia"},
-            {"SR","Suriname"},
-            {"SS","South Sudan"},
-            {"ST","Sao Tome and Principe"},
-            {"SV","El Salvador"},
-            {"SX","Sint Maarten (Dutch part)"},
-            {"SY","Syrian Arab Republic"},
-            {"SZ","Swaziland"},
+            {"SA", "Saudi Arabia"},
+            {"SB", "Solomon Islands"},
+            {"SC", "Seychelles"},
+            {"SD", "Sudan"},
+            {"SE", "Sweden"},
+            {"SG", "Singapore"},
+            {"SH", "Saint Helena, Ascension and Tristan da Cunha"},
+            {"SI", "Slovenia"},
+            {"SJ", "Svalbard and Jan Mayen"},
+            {"SK", "Slovakia"},
+            {"SL", "Sierra Leone"},
+            {"SM", "San Marino"},
+            {"SN", "Senegal"},
+            {"SO", "Somalia"},
+            {"SR", "Suriname"},
+            {"SS", "South Sudan"},
+            {"ST", "Sao Tome and Principe"},
+            {"SV", "El Salvador"},
+            {"SX", "Sint Maarten (Dutch part)"},
+            {"SY", "Syrian Arab Republic"},
+            {"SZ", "Swaziland"},
             //T
-            {"TC","Turks and Caicos Islands"},
-            {"TD","Chad"},
-            {"TF","French Southern Territories"},
-            {"TG","Togo"},
-            {"TH","Thailand"},
-            {"TJ","Tajikistan"},
-            {"TK","Tokelau"},
-            {"TL","Timor-Leste"},
-            {"TM","Turkmenistan"},
-            {"TN","Tunisia"},
-            {"TO","Tonga"},
-            {"TR","Turkey"},
-            {"TT","Tuvalu"},
-            {"TW","Taiwan, Province of China"},
-            {"TZ","Tanzania, United Republic of"},
+            {"TC", "Turks and Caicos Islands"},
+            {"TD", "Chad"},
+            {"TF", "French Southern Territories"},
+            {"TG", "Togo"},
+            {"TH", "Thailand"},
+            {"TJ", "Tajikistan"},
+            {"TK", "Tokelau"},
+            {"TL", "Timor-Leste"},
+            {"TM", "Turkmenistan"},
+            {"TN", "Tunisia"},
+            {"TO", "Tonga"},
+            {"TR", "Turkey"},
+            {"TT", "Tuvalu"},
+            {"TW", "Taiwan, Province of China"},
+            {"TZ", "Tanzania, United Republic of"},
             //U
-            {"UA","Ukraine"},
-            {"UG","Uganda"},
-            {"UM","United States Minor Outlying Islands"},
-            {"US","United States of America"},
-            {"UY","Uruguay"},
-            {"UZ","Uzbekistan"},
+            {"UA", "Ukraine"},
+            {"UG", "Uganda"},
+            {"UM", "United States Minor Outlying Islands"},
+            {"US", "United States of America"},
+            {"UY", "Uruguay"},
+            {"UZ", "Uzbekistan"},
             //V
-            {"VA","Holy See"},
-            {"VC","Saint Vincent and the Grenadines"},
-            {"VE","Venezuela, Bolivarian Republic of"},
-            {"VG","Virgin Islands, British"},
-            {"VI","Virgin Islands, U.S."},
-            {"VN","Viet Nam"},
-            {"VU","Vanuatu"},
+            {"VA", "Holy See"},
+            {"VC", "Saint Vincent and the Grenadines"},
+            {"VE", "Venezuela, Bolivarian Republic of"},
+            {"VG", "Virgin Islands, British"},
+            {"VI", "Virgin Islands, U.S."},
+            {"VN", "Viet Nam"},
+            {"VU", "Vanuatu"},
             //W
-            {"WF","Wallis and Futuna"},
-            {"WS","Samoa"},
+            {"WF", "Wallis and Futuna"},
+            {"WS", "Samoa"},
             //Y
-            {"YE","Yemen"},
-            {"YT","Mayotte"},
+            {"YE", "Yemen"},
+            {"YT", "Mayotte"},
             //Z
-            {"ZA","South Africa"},
-            {"ZM","Zambia"},
-            {"ZW","Zimbabwe"}
+            {"ZA", "South Africa"},
+            {"ZM", "Zambia"},
+            {"ZW", "Zimbabwe"}
     };
 
     /*
@@ -354,57 +354,57 @@ public class Util {
             {"BG", "Bulgaria"},
             {"BO", "Bolivia, Plurinational State of"},
             {"BR", "Brazil"},
-            {"CA","Canada"},
-            {"CH","Switzerland"},
-            {"CL","Chile"},
-            {"CO","Colombia"},
-            {"CR","Costa Rica"},
-            {"CY","Cyprus"},
-            {"CZ","Czech Republic"},
-            {"DE","Germany"},
-            {"DK","Denmark"},
-            {"DO","Dominican Republic"},
-            {"EC","Ecuador"},
-            {"EE","Estonia"},
-            {"ES","Spain"},
-            {"FI","Finland"},
-            {"FR","France"},
-            {"GB","United Kingdom of Great Britain and Northern Ireland"},
-            {"GR","Greece"},
-            {"GT","Guatemala"},
-            {"HK","Hong Kong"},
-            {"HU","Hungary"},
-            {"IE","Ireland"},
-            {"IS","Iceland"},
-            {"IT","Italy"},
-            {"LI","Liechtenstein"},
-            {"LT","Lithuania"},
-            {"LU","Luxembourg"},
-            {"LV","Latvia"},
-            {"MC","Monaco"},
-            {"MT","Malta"},
-            {"MX","Mexico"},
-            {"MY","Malaysia"},
-            {"NI","Nicaragua"},
-            {"NL","Netherlands"},
-            {"NO","Norway"},
-            {"NZ","New Zealand"},
-            {"PA","Panama"},
-            {"PE","Peru"},
-            {"PH","Philippines"},
-            {"PL","Poland"},
-            {"PT","Portugal"},
-            {"PY","Paraguay"},
-            {"RO","Romania"},
-            {"SE","Sweden"},
-            {"SG","Singapore"},
-            {"SI","Slovenia"},
-            {"SK","Slovakia"},
-            {"SV","El Salvador"},
-            {"TR","Turkey"},
-            {"TW","Taiwan, Province of China"},
-            {"US","United States of America"},
-            {"UY","Uruguay"},
+            {"CA", "Canada"},
+            {"CH", "Switzerland"},
+            {"CL", "Chile"},
+            {"CO", "Colombia"},
+            {"CR", "Costa Rica"},
+            {"CY", "Cyprus"},
+            {"CZ", "Czech Republic"},
+            {"DE", "Germany"},
+            {"DK", "Denmark"},
+            {"DO", "Dominican Republic"},
+            {"EC", "Ecuador"},
+            {"EE", "Estonia"},
+            {"ES", "Spain"},
+            {"FI", "Finland"},
+            {"FR", "France"},
+            {"GB", "United Kingdom of Great Britain and Northern Ireland"},
+            {"GR", "Greece"},
+            {"GT", "Guatemala"},
+            {"HK", "Hong Kong"},
+            {"HU", "Hungary"},
+            {"IE", "Ireland"},
+            {"IS", "Iceland"},
+            {"IT", "Italy"},
+            {"LI", "Liechtenstein"},
+            {"LT", "Lithuania"},
+            {"LU", "Luxembourg"},
+            {"LV", "Latvia"},
+            {"MC", "Monaco"},
+            {"MT", "Malta"},
+            {"MX", "Mexico"},
+            {"MY", "Malaysia"},
+            {"NI", "Nicaragua"},
+            {"NL", "Netherlands"},
+            {"NO", "Norway"},
+            {"NZ", "New Zealand"},
+            {"PA", "Panama"},
+            {"PE", "Peru"},
+            {"PH", "Philippines"},
+            {"PL", "Poland"},
+            {"PT", "Portugal"},
+            {"PY", "Paraguay"},
+            {"RO", "Romania"},
+            {"SE", "Sweden"},
+            {"SG", "Singapore"},
+            {"SI", "Slovenia"},
+            {"SK", "Slovakia"},
+            {"SV", "El Salvador"},
+            {"TR", "Turkey"},
+            {"TW", "Taiwan, Province of China"},
+            {"US", "United States of America"},
+            {"UY", "Uruguay"},
     };
 
     /*
@@ -422,62 +422,62 @@ public class Util {
             {"BO", "Bolivia, Plurinational State of"},//Bolivia
             {"BR", "Brazil"},//
             {"BG", "Bulgaria"},//
-            {"CA","Canada"},//
-            {"CL","Chile"},//
-            {"CO","Colombia"},//
-            {"CR","Costa Rica"},//
-            {"CY","Cyprus"},//
-            {"CZ","Czech Republic"},//
-            {"DK","Denmark"},//
-            {"FO","Faroe Islands"},//Denmark
-            {"GL","Greenland"},//Denmark
-            {"DO","Dominican Republic"},
-            {"EC","Ecuador"},//
-            {"SV","El Salvador"},//
-            {"EE","Estonia"},//
-            {"FI","Finland"},//
+            {"CA", "Canada"},//
+            {"CL", "Chile"},//
+            {"CO", "Colombia"},//
+            {"CR", "Costa Rica"},//
+            {"CY", "Cyprus"},//
+            {"CZ", "Czech Republic"},//
+            {"DK", "Denmark"},//
+            {"FO", "Faroe Islands"},//Denmark
+            {"GL", "Greenland"},//Denmark
+            {"DO", "Dominican Republic"},
+            {"EC", "Ecuador"},//
+            {"SV", "El Salvador"},//
+            {"EE", "Estonia"},//
+            {"FI", "Finland"},//
             {"AX", "Åland Islands"},//Finland
-            {"FR","France"},//
-            {"YT","Mayotte"},//France
-            {"RE","Réunion"},//France
-            {"PF","French Polynesia"},//France
-            {"PM","Saint Pierre and Miquelon"},//France
-            {"WF","Wallis and Futuna"},//France
-            {"NC","New Caledonia"},//France
-            {"DE","Germany"},//
-            {"GR","Greece"},//
-            {"GT","Guatemala"},//
-            {"HN","Honduras"},//
-            {"HK","Hong Kong"},//
-            {"HU","Hungary"},//
-            {"IS","Iceland"},//
-            {"IT","Italy"},//
-            {"LV","Latvia"},//
-            {"LI","Liechtenstein"},//
-            {"LT","Lithuania"},//
-            {"LU","Luxembourg"},//
-            {"MY","Malaysia"},//
-            {"MT","Malta"},//
-            {"MX","Mexico"},//
-            {"MC","Monaco"},//
-            {"NL","Netherlands"},//
-            {"SX","Sint Maarten (Dutch part)"},//Netherlands Antilles
-            {"NZ","New Zealand"},//
-            {"CK","Cook Islands"},//New Zealand
-            {"NU","Niue"},//New Zealand
-            {"TK","Tokelau"},//Tokelau
-            {"NI","Nicaragua"},//
-            {"NO","Norway"},//
-            {"SJ","Svalbard and Jan Mayen"},//Norway
-            {"PA","Panama"},//
-            {"PY","Paraguay"},//
-            {"PE","Peru"},//
-            {"PH","Philippines"},//
-            {"PL","Poland"},//
-            {"PT","Portugal"},//
-            {"SG","Singapore"},//
-            {"SK","Slovakia"},//
-            {"ES","Spain"},//
+            {"FR", "France"},//
+            {"YT", "Mayotte"},//France
+            {"RE", "Réunion"},//France
+            {"PF", "French Polynesia"},//France
+            {"PM", "Saint Pierre and Miquelon"},//France
+            {"WF", "Wallis and Futuna"},//France
+            {"NC", "New Caledonia"},//France
+            {"DE", "Germany"},//
+            {"GR", "Greece"},//
+            {"GT", "Guatemala"},//
+            {"HN", "Honduras"},//
+            {"HK", "Hong Kong"},//
+            {"HU", "Hungary"},//
+            {"IS", "Iceland"},//
+            {"IT", "Italy"},//
+            {"LV", "Latvia"},//
+            {"LI", "Liechtenstein"},//
+            {"LT", "Lithuania"},//
+            {"LU", "Luxembourg"},//
+            {"MY", "Malaysia"},//
+            {"MT", "Malta"},//
+            {"MX", "Mexico"},//
+            {"MC", "Monaco"},//
+            {"NL", "Netherlands"},//
+            {"SX", "Sint Maarten (Dutch part)"},//Netherlands Antilles
+            {"NZ", "New Zealand"},//
+            {"CK", "Cook Islands"},//New Zealand
+            {"NU", "Niue"},//New Zealand
+            {"TK", "Tokelau"},//Tokelau
+            {"NI", "Nicaragua"},//
+            {"NO", "Norway"},//
+            {"SJ", "Svalbard and Jan Mayen"},//Norway
+            {"PA", "Panama"},//
+            {"PY", "Paraguay"},//
+            {"PE", "Peru"},//
+            {"PH", "Philippines"},//
+            {"PL", "Poland"},//
+            {"PT", "Portugal"},//
+            {"SG", "Singapore"},//
+            {"SK", "Slovakia"},//
+            {"ES", "Spain"},//
             //Balearic Islands is NOT in ISO 3166-1 alpha-2
             //https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
             //It is in ISO 3166-2, as IB, according to
@@ -486,34 +486,34 @@ public class Util {
             //Canary Islands is NOT in ISO 3166-1 alpha-2
             //It is in ISO 3166, as IC (reserved), according to
             //https://en.wikipedia.org/wiki/Canary_Islands
-            {"IC","Canary Islands"},//Spain
+            {"IC", "Canary Islands"},//Spain
             //Skipped Ceuta and Melilla
-            {"SE","Sweden"},//
-            {"CH","Switzerland"},//
-            {"TW","Taiwan"},//
-            {"UK","United Kingdom"},//
+            {"SE", "Sweden"},//
+            {"CH", "Switzerland"},//
+            {"TW", "Taiwan"},//
+            {"UK", "United Kingdom"},//
             {"BM", "Bermuda"},//United Kingdom
-            {"FK","Falkland Islands"},//United Kingdom
-            {"GI","Gibraltar"},//United Kingdom
-            {"PN","Pitcairn Islands"},//United Kingdom
-            {"SH","Saint Helena, Ascension and Tristan da Cunha"},//United Kingdom
+            {"FK", "Falkland Islands"},//United Kingdom
+            {"GI", "Gibraltar"},//United Kingdom
+            {"PN", "Pitcairn Islands"},//United Kingdom
+            {"SH", "Saint Helena, Ascension and Tristan da Cunha"},//United Kingdom
             //Skipped Sovereign Base Areas of Akrotiri and Dhekelia (Cyprus)
-            {"GG","Guernsey"},//United Kingdom
-            {"IM","Isle of Man"},//United Kingdom
-            {"JE","Jersey"},//United Kingdom
-            {"UY","Uruguay"},//
-            {"US","United States of America"},//
+            {"GG", "Guernsey"},//United Kingdom
+            {"IM", "Isle of Man"},//United Kingdom
+            {"JE", "Jersey"},//United Kingdom
+            {"UY", "Uruguay"},//
+            {"US", "United States of America"},//
             {"AS", "American Samoa"},//United States of America
-            {"GU","Guam"},//US
-            {"MP","Northern Mariana Islands"},//US
-            {"PR","Puerto Rico"},//US
-            {"UM","United States Minor Outlying Islands"},//US
-            {"VI","Virgin Islands, U.S."},//US
+            {"GU", "Guam"},//US
+            {"MP", "Northern Mariana Islands"},//US
+            {"PR", "Puerto Rico"},//US
+            {"UM", "United States Minor Outlying Islands"},//US
+            {"VI", "Virgin Islands, U.S."},//US
     };
 
-    public static int getIndexByCountryCode(String countryCode, String[][] list){
-        for (int i = 0; i < list.length; i++){
-            if (list[i][0].equalsIgnoreCase(countryCode)){
+    public static int getIndexByCountryCode(String countryCode, String[][] list) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i][0].equalsIgnoreCase(countryCode)) {
                 return i;
             }
         }
@@ -546,28 +546,35 @@ public class Util {
         return images.get(index).url;
     }
 
-        public static void handleUnavailableCountry(Activity activity) {
-                AlertDialog.Builder b = new AlertDialog.Builder(activity);
-                b.setTitle(R.string.spotify_error);
-                b.setMessage(R.string.unavailable_country_advice);
-                b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                                //nothing, just remove dialog.
-                        }
-                });
-                b.create().show();
-        }
-        public static void handleNoNetwork(Activity activity) {
-                AlertDialog.Builder b = new AlertDialog.Builder(activity);
-                b.setTitle(R.string.spotify_error);
-                b.setMessage(R.string.error_no_network);
-                b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                                //nothing, just remove dialog.
-                        }
-                });
-                b.create().show();
-        }
+    public static void handleUnavailableCountry(Activity activity) {
+        AlertDialog.Builder b = new AlertDialog.Builder(activity);
+        b.setTitle(R.string.spotify_error);
+        b.setMessage(R.string.unavailable_country_advice);
+        b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //nothing, just remove dialog.
+            }
+        });
+        b.create().show();
+    }
+
+    public static void handleNoNetwork(Activity activity) {
+        AlertDialog.Builder b = new AlertDialog.Builder(activity);
+        b.setTitle(R.string.spotify_error);
+        b.setMessage(R.string.error_no_network);
+        b.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //nothing, just remove dialog.
+            }
+        });
+        b.create().show();
+    }
+
+    public static long map(long x, long in_min, long in_max, long out_min, long out_max) {
+        //https://www.arduino.cc/en/reference/map
+        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+
 }

@@ -108,17 +108,40 @@ public class PlayerFragment extends DialogFragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //TODO: do something!!
+                if (!fromUser) {
+                    return;
+                }
+                //long elapsedTime = mediaPlayer.getCurrentPosition(); //milliseconds
+                int ms = (int) Util.map(progress, 0, seekBar.getMax(), 0, mediaPlayer.getDuration());
+                int elapsedSeconds = (int) (ms / 1000);
+                String timeString = "0:"; //fix for songs longer than 1 minute!!!
+                timeString += (elapsedSeconds < 10) ? ("0" + elapsedSeconds) : elapsedSeconds;
+                tvElapsedTime.setText(timeString);
+                tvTotalTime.setText("0:" + (mediaPlayer.getDuration() / 1000));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                if (mediaPlayer != null) {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.pause();
+                        playPauseBtn.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_media_play));
+                    }
+                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if (mediaPlayer != null) {
+                    if (mediaPlayerIsPrepared) {
+                        int ms = (int) Util.map(seekBar.getProgress(), 0, seekBar.getMax(), 0, mediaPlayer.getDuration());
+                        mediaPlayer.seekTo(ms);
+                        mediaPlayer.start();
+                        playPauseBtn.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_media_pause));
+                        //Start update loop
+                        mHandler.post(runElapsedTime);
+                    }
+                }
             }
         });
         //
@@ -126,7 +149,7 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //Play / Pause
-                if (mediaPlayer == null){
+                if (mediaPlayer == null) {
                     return; //prevent NullPointerException
                 }
                 if (mediaPlayer.isPlaying()) {
@@ -216,7 +239,6 @@ public class PlayerFragment extends DialogFragment {
                 });
             }
         });
-
     }
 
     public void initMediaPlayer() {
