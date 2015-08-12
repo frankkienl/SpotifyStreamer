@@ -23,6 +23,8 @@
         <activity android:name=".SettingsActivity" android:label="@string/action_settings"/>
 
         <activity android:name=".PlayerActivity" android:label="@string/player"/>
+
+        <service android:name=".PlayerService" android:label="@string/player"></service>
     </application>
 
 </manifest>
