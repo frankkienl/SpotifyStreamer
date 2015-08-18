@@ -1,10 +1,14 @@
 package nl.frankkie.spotifystreamer;
 
 import android.app.DialogFragment;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +48,8 @@ public class PlayerFragment extends DialogFragment {
     MyTrack currentMyTrack;
     Track mTrack;
     //http://developer.android.com/guide/topics/media/mediaplayer.html
-    private MediaPlayer mediaPlayer;
     boolean mediaPlayerIsPrepared = false;
-    boolean startWhenPrepared = false;
+    boolean startWhenPrepared = true;
     String mediaUrl;
     Handler mHandler = new Handler();
     //UI Elements
@@ -82,17 +85,42 @@ public class PlayerFragment extends DialogFragment {
             }
         }
     };
+    //
+    PlayerService.LocalBinder mBinder;
+    ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mBinder = (PlayerService.LocalBinder) service;
+            initMediaPlayer();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            //oh dear..
+        }
+    };
+
+    @Override
+    public void onStop() {
+        getActivity().unbindService(serviceConnection
+        );
+    }
 
     public MediaPlayer getMediaPlayer(){
-        return mediaPlayer;
+        if (mBinder == null){return null;}
+        return mBinder.getMediaPlayer();
     }
 
     public void setMediaPlayer(MediaPlayer mediaPlayer){
-        this.mediaPlayer = mediaPlayer;
+        if (mBinder == null){return;}
+        mBinder.setMediaPlayer(mediaPlayer);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().startService(new Intent(getActivity(), PlayerService.class));
+        getActivity().bindService(new Intent(getActivity(),PlayerService.class), serviceConnection,0);
+        //
         View v = inflater.inflate(R.layout.player_fragment, container, false);
         myTracks = getArguments().getParcelableArrayList(TRACK_MYTRACKS);
         currentPosition = getArguments().getInt(TRACK_POSITION);
@@ -227,7 +255,7 @@ public class PlayerFragment extends DialogFragment {
             @Override
             public void success(Track track, Response response) {
                 mTrack = track;
-                initMediaPlayer();
+                //initMediaPlayer();
             }
 
             @Override
@@ -265,7 +293,8 @@ public class PlayerFragment extends DialogFragment {
             public void onPrepared(MediaPlayer mp) {
                 mediaPlayerIsPrepared = true;
                 if (startWhenPrepared) {
-                    getMediaPlayer().start();
+                    playPauseBtn.performClick();
+                    //getMediaPlayer().start();
                 }
             }
         });

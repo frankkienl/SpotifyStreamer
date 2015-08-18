@@ -20,6 +20,10 @@ public class PlayerService extends Service {
         MediaPlayer getMediaPlayer(){
             return PlayerService.this.mMediaPlayer;
         }
+
+        void setMediaPlayer(MediaPlayer mediaPlayer){
+            PlayerService.this.mMediaPlayer = mediaPlayer;
+        }
     }
 
     @Override
