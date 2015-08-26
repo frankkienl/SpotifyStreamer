@@ -40,6 +40,7 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
     public static String TRACK_MYTRACKS = "track_mytracks";
     public static String TRACK_ARTIST = "track_artist";
     public static String TRACK_POSITION = "track_position";
+    public static String RESTORE_CURRENT_TRACK_POSITION = "restore_current_track_position";
     ArrayList<MyTrack> myTracks;
     int currentPosition = -1;
     String currentArtists;
@@ -99,6 +100,25 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
             //oh dear..
         }
     };
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        //http://stackoverflow.com/questions/15313598/once-for-all-how-to-correctly-save-instance-state-of-fragments-in-back-stack
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            currentPosition = savedInstanceState.getInt(RESTORE_CURRENT_TRACK_POSITION);
+            currentMyTrack = myTracks.get(currentPosition);
+            prepareTrack(false);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //http://stackoverflow.com/questions/15313598/once-for-all-how-to-correctly-save-instance-state-of-fragments-in-back-stack
+        //super.onSaveInstanceState(outState);
+        outState.putInt(RESTORE_CURRENT_TRACK_POSITION, currentPosition);
+    }
 
     @Override
     public void onStop() {
