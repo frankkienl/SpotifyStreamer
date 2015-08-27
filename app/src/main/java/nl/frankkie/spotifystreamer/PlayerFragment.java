@@ -48,6 +48,7 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
     Track mTrack;
     //http://developer.android.com/guide/topics/media/mediaplayer.html
     boolean startWhenPrepared = true;
+    boolean stopCurrentSong = false;
     String mediaUrl;
     Handler mHandler = new Handler();
     //UI Elements
@@ -90,6 +91,17 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
         public void onServiceConnected(ComponentName name, IBinder service) {
             mBinder = (PlayerService.LocalBinder) service;
             mBinder.setCallbacks(PlayerFragment.this);
+            if (stopCurrentSong) {
+                if (getMediaPlayer() != null) {
+                    if (getMediaPlayer().isPlaying()) {
+                        getMediaPlayer().stop();
+                    }
+                    getMediaPlayer().release();
+                    setMediaPlayer(null);
+                }
+                stopCurrentSong=false;
+            }
+
             if (mTrack != null) {
                 initMediaPlayer();
             }
@@ -102,14 +114,30 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
     };
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    //public void onActivityCreated(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         //http://stackoverflow.com/questions/15313598/once-for-all-how-to-correctly-save-instance-state-of-fragments-in-back-stack
-        super.onActivityCreated(savedInstanceState);
+        //super.onActivityCreated(savedInstanceState);
+        super.onCreate(savedInstanceState);
+        ////////
+        getActivity().startService(new Intent(getActivity(), PlayerService.class));
+        getActivity().bindService(new Intent(getActivity(), PlayerService.class), serviceConnection, 0);
+        //
+        myTracks = getArguments().getParcelableArrayList(TRACK_MYTRACKS);
+        currentPosition = getArguments().getInt(TRACK_POSITION);
+        currentMyTrack = myTracks.get(currentPosition);
+        currentArtists = getArguments().getString(TRACK_ARTIST);
+        //////////
         if (savedInstanceState != null) {
             //Restore the fragment's state here
             currentPosition = savedInstanceState.getInt(RESTORE_CURRENT_TRACK_POSITION);
             currentMyTrack = myTracks.get(currentPosition);
-            prepareTrack(false);
+            stopCurrentSong = false;
+        } else {
+            //If Fragment is (re-)started but not because of config-change.
+            //Stop music
+            //Stop currently playing
+            stopCurrentSong = true;
         }
     }
 
@@ -123,7 +151,12 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
     @Override
     public void onStop() {
         super.onStop();
-        getActivity().unbindService(serviceConnection);
+        try {
+            getActivity().unbindService(serviceConnection);
+        } catch (Exception e) {
+            //ignore
+            e.printStackTrace();
+        }
     }
 
     public MediaPlayer getMediaPlayer() {
@@ -142,19 +175,10 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getActivity().startService(new Intent(getActivity(), PlayerService.class));
-        getActivity().bindService(new Intent(getActivity(), PlayerService.class), serviceConnection, 0);
-        //
         View v = inflater.inflate(R.layout.player_fragment, container, false);
-        myTracks = getArguments().getParcelableArrayList(TRACK_MYTRACKS);
-        if (currentPosition == -1) {
-            //only set from intent (bundle) if not rotating screen
-            currentPosition = getArguments().getInt(TRACK_POSITION);
-        }
-        currentMyTrack = myTracks.get(currentPosition);
-        currentArtists = getArguments().getString(TRACK_ARTIST);
         initUI(v);
-        prepareTrack(false);
+
+        prepareTrack();
         return v;
     }
 
@@ -245,7 +269,17 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
             public void onClick(View v) {
                 currentPosition--;
                 currentMyTrack = myTracks.get(currentPosition);
-                prepareTrack(true);
+                //Stop currently playing
+                if (true) {
+                    if (getMediaPlayer() != null) {
+                        if (getMediaPlayer().isPlaying()) {
+                            getMediaPlayer().stop();
+                        }
+                        getMediaPlayer().release();
+                        setMediaPlayer(null);
+                    }
+                }
+                prepareTrack();
             }
         });
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -253,32 +287,33 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
             public void onClick(View v) {
                 currentPosition++;
                 currentMyTrack = myTracks.get(currentPosition);
-                prepareTrack(true);
+                //Stop currently playing
+                if (true) {
+                    if (getMediaPlayer() != null) {
+                        if (getMediaPlayer().isPlaying()) {
+                            getMediaPlayer().stop();
+                        }
+                        getMediaPlayer().release();
+                        setMediaPlayer(null);
+                    }
+                }
+                prepareTrack();
             }
         });
 
-        if (getMediaPlayer() != null){
-            if (getMediaPlayer().isPlaying()){
+        if (getMediaPlayer() != null) {
+            if (getMediaPlayer().isPlaying()) {
                 playbackStarted();
             }
         }
     }
 
-    public void prepareTrack(boolean nextSong) {
+    public void prepareTrack() {
         //Disable previous and next button when reached end of list
         previousBtn.setEnabled((currentPosition != 0));
         nextBtn.setEnabled((currentPosition != myTracks.size() - 1));
         playPauseBtn.setImageDrawable(getActivity().getResources().getDrawable(android.R.drawable.ic_media_play));
-        //Stop currently playing
-        if (nextSong) {
-            if (getMediaPlayer() != null) {
-                if (getMediaPlayer().isPlaying()) {
-                    getMediaPlayer().stop();
-                }
-                getMediaPlayer().release();
-                setMediaPlayer(null);
-            }
-        }
+
         seekBar.setProgress(0);
         tvElapsedTime.setText("0:00");
         tvAlbum.setText(currentMyTrack.album);
@@ -327,7 +362,7 @@ public class PlayerFragment extends DialogFragment implements PlayerService.Medi
             mediaUrl = mTrack.preview_url;
             mBinder.initMediaPlayer(mediaUrl);
         } else {
-            if (getMediaPlayer().isPlaying()){
+            if (getMediaPlayer().isPlaying()) {
                 mHandler.post(runElapsedTime);
             }
         }
